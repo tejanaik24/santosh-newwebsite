@@ -8,9 +8,10 @@ gsap.registerPlugin(ScrollTrigger);
 export const useLenis = () => {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.15,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      duration: 0.85,
+      easing: (t) => 1 - Math.pow(1 - t, 3),
       smoothWheel: true,
+      touchMultiplier: 2,
     });
 
     lenis.on("scroll", ScrollTrigger.update);
