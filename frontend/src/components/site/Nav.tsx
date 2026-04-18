@@ -51,7 +51,7 @@ export const Nav = () => {
       >
         <div className="container flex items-center justify-between h-20">
           <a href="#home" className="flex items-center" aria-label="Srivatsala Silver House home">
-            <Logo className="h-12 w-auto rounded-md" />
+            <Logo className="h-12 w-auto" />
           </a>
 
           <nav className="hidden lg:flex items-center gap-8">
@@ -96,7 +96,7 @@ export const Nav = () => {
         }`}
       >
         <div className="container flex items-center justify-between h-20">
-          <Logo className="h-12 w-auto rounded-md" />
+          <Logo className="h-12 w-auto" />
           <button aria-label="Close menu" onClick={() => setOpen(false)} className="grid place-items-center w-10 h-10 rounded-full text-silver">
             <X size={24} />
           </button>

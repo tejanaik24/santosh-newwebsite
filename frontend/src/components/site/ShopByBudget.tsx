@@ -2,45 +2,59 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { waLink } from "@/lib/site";
+import productSilver from "@/assets/product-silver.jpg";
+import productJhumka from "@/assets/product-jhumka.jpg";
+import kasulaperu from "@/assets/kasulaperu-new.webp";
+import vadanam from "@/assets/vadanam.webp";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const HEX = "polygon(50% 0%, 100% 18%, 100% 82%, 50% 100%, 0% 82%, 0% 18%)";
 
 const budgets = [
   {
     range: "Under ₹10,000",
     label: "Daily Essentials",
     desc: "Silver chains, toe rings, anklets & everyday wear",
-    gradient: "from-slate-800 to-slate-700",
-    accent: "hsl(var(--silver))",
-    emoji: "✦",
-    tag: "Silver",
+    accentColor: "#E5E4E2",
+    accentHsl: "60 4% 89%",
+    shadowColor: "hsl(60 4% 89% / 0.35)",
+    borderColor: "hsl(60 4% 89% / 0.55)",
+    img: productSilver,
+    waMsg: "Hi, I'm looking for jewellery under ₹10,000. Can you help?",
   },
   {
     range: "₹10K – ₹50K",
     label: "Gifting Picks",
     desc: "Gold earrings, small pendants, lightweight bangles",
-    gradient: "from-amber-950 to-yellow-900",
-    accent: "hsl(var(--gold))",
-    emoji: "✦",
-    tag: "Gold",
+    accentColor: "#C9A84C",
+    accentHsl: "44 56% 54%",
+    shadowColor: "hsl(44 56% 54% / 0.4)",
+    borderColor: "hsl(44 73% 66% / 0.6)",
+    img: productJhumka,
+    waMsg: "Hi, I'm looking for jewellery in the ₹10K–₹50K range.",
   },
   {
     range: "₹50K – ₹2L",
     label: "Statement Pieces",
     desc: "Kasulaperu, jhumkas, chokers & heritage necklaces",
-    gradient: "from-yellow-900 to-amber-800",
-    accent: "hsl(var(--gold-light))",
-    emoji: "✦",
-    tag: "Andhra Traditional",
+    accentColor: "#E8C96A",
+    accentHsl: "44 73% 66%",
+    shadowColor: "hsl(44 73% 66% / 0.4)",
+    borderColor: "hsl(44 73% 66% / 0.7)",
+    img: kasulaperu,
+    waMsg: "Hi, I'm looking for jewellery in the ₹50K–₹2L range.",
   },
   {
     range: "₹2L – ₹5L",
     label: "Milestone Jewels",
     desc: "Vaddanam, bridal sets, heirloom collections",
-    gradient: "from-rose-950 to-pink-900",
-    accent: "hsl(var(--rose-gold))",
-    emoji: "✦",
-    tag: "Bridal",
+    accentColor: "#B76E79",
+    accentHsl: "351 33% 57%",
+    shadowColor: "hsl(351 33% 57% / 0.4)",
+    borderColor: "hsl(351 40% 65% / 0.6)",
+    img: vadanam,
+    waMsg: "Hi, I'm looking for bridal jewellery in the ₹2L–₹5L range.",
   },
 ];
 
@@ -53,10 +67,10 @@ export const ShopByBudget = () => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         cards,
-        { opacity: 0, y: 60, scale: 0.94 },
+        { opacity: 0, y: 70, scale: 0.88 },
         {
           opacity: 1, y: 0, scale: 1,
-          stagger: 0.12, duration: 0.85, ease: "power3.out",
+          stagger: 0.14, duration: 0.9, ease: "power3.out",
           scrollTrigger: { trigger: ref.current!, start: "top 78%" },
         }
       );
@@ -66,19 +80,20 @@ export const ShopByBudget = () => {
 
   return (
     <section className="py-24 sm:py-32 relative overflow-hidden">
-      {/* background shimmer */}
       <div
         aria-hidden
         className="absolute inset-0 -z-10 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at 30% 60%, hsl(44 73% 50% / 0.06) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, hsl(340 50% 60% / 0.05) 0%, transparent 50%)",
+            "radial-gradient(ellipse at 30% 60%, hsl(44 73% 50% / 0.07) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, hsl(340 50% 60% / 0.06) 0%, transparent 50%)",
         }}
       />
 
       <div className="container" ref={ref}>
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs uppercase tracking-[0.4em] text-rose-gold">Curated for every occasion</span>
+          <span className="text-xs uppercase tracking-[0.4em] text-rose-gold">
+            Curated for every occasion
+          </span>
           <h2 className="font-display text-4xl sm:text-5xl mt-4 text-silver">
             Shop by <span className="text-gradient-gold">Budget</span>
           </h2>
@@ -87,45 +102,90 @@ export const ShopByBudget = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {budgets.map((b) => (
             <a
               key={b.range}
               data-budget-card
-              href={waLink(`Hi, I'm looking for jewellery in the ${b.range} range. Can you help?`)}
+              href={waLink(b.waMsg)}
               target="_blank"
               rel="noopener"
-              className={`group relative rounded-2xl overflow-hidden cursor-pointer block bg-gradient-to-br ${b.gradient} border border-white/10 hover:border-[hsl(var(--gold)/0.5)] transition-all duration-500 hover:-translate-y-2 shadow-[0_8px_32px_-12px_rgba(0,0,0,0.6)] hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.7)]`}
+              className="group cursor-pointer block"
+              style={{
+                filter: `drop-shadow(0 0 4px ${b.shadowColor}) drop-shadow(0 12px 28px rgba(0,0,0,0.55))`,
+              }}
             >
-              {/* glow */}
+              {/* Hex border shell */}
               <div
-                aria-hidden
-                className="absolute -top-6 -right-6 w-28 h-28 rounded-full blur-2xl opacity-20 group-hover:opacity-50 transition-opacity duration-500"
-                style={{ background: b.accent }}
-              />
-
-              <div className="relative p-7 flex flex-col gap-4">
+                className="relative transition-all duration-500 group-hover:scale-105"
+                style={{
+                  clipPath: HEX,
+                  aspectRatio: "4/5",
+                  padding: "3px",
+                  background: `linear-gradient(160deg, ${b.borderColor}, transparent 60%, ${b.borderColor})`,
+                }}
+              >
+                {/* Inner hex content */}
                 <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center text-xl border border-white/10"
-                  style={{ background: `${b.accent}22` }}
+                  className="relative w-full h-full overflow-hidden"
+                  style={{ clipPath: HEX }}
                 >
-                  <span style={{ color: b.accent }} className="font-display text-2xl">✦</span>
-                </div>
-                <div>
-                  <p className="font-display text-2xl text-white leading-tight">{b.range}</p>
-                  <p className="text-sm font-medium mt-1" style={{ color: b.accent }}>{b.label}</p>
-                </div>
-                <p className="text-white/60 text-sm leading-relaxed">{b.desc}</p>
-                <div className="flex items-center gap-2 text-sm font-medium mt-2" style={{ color: b.accent }}>
-                  Explore now
-                  <span className="transition-transform duration-300 group-hover:translate-x-1.5">→</span>
+                  {/* Photo */}
+                  <img
+                    src={b.img}
+                    alt={b.label}
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+
+                  {/* Gradient overlay */}
+                  <div
+                    aria-hidden
+                    className="absolute inset-0"
+                    style={{
+                      background:
+                        "linear-gradient(to bottom, rgba(5,10,30,0.2) 0%, rgba(5,10,30,0.55) 40%, rgba(5,10,30,0.92) 100%)",
+                    }}
+                  />
+
+                  {/* Accent glow top */}
+                  <div
+                    aria-hidden
+                    className="absolute -top-8 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full blur-2xl opacity-30 group-hover:opacity-55 transition-opacity duration-500"
+                    style={{ background: b.accentColor }}
+                  />
+
+                  {/* Text content */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-end text-center pb-[18%] px-4">
+                    <p
+                      className="font-display text-lg sm:text-xl lg:text-2xl text-white leading-tight font-medium"
+                    >
+                      {b.range}
+                    </p>
+                    <p
+                      className="text-xs sm:text-sm font-semibold mt-1 tracking-wide"
+                      style={{ color: b.accentColor }}
+                    >
+                      {b.label}
+                    </p>
+                    <p className="text-white/55 text-[10px] sm:text-xs mt-1.5 leading-relaxed line-clamp-2">
+                      {b.desc}
+                    </p>
+                    <div
+                      className="mt-3 flex items-center gap-1 text-xs font-semibold tracking-wider transition-transform duration-300 group-hover:translate-y-[-2px]"
+                      style={{ color: b.accentColor }}
+                    >
+                      Explore
+                      <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </a>
           ))}
         </div>
 
-        <p className="text-center text-silver/40 text-xs mt-10 tracking-wide">
+        <p className="text-center text-silver/40 text-xs mt-12 tracking-wide">
           Prices based on prevailing gold/silver rates · BIS Hallmarked · In-store pricing may vary
         </p>
       </div>
