@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Volume2, VolumeX } from "lucide-react";
 import { waLink } from "@/lib/site";
-import slideHues from "@/assets/slide-hues.jpg";
 import slideBridal from "@/assets/slide-bridal.jpg";
-import slideFestive from "@/assets/slide-festive.jpg";
+import heroVideo1 from "@/assets/hero-video-1.mp4";
+import heroVideo2 from "@/assets/hero-video-2.mp4";
 
 type Slide = {
-  img: string;
+  video?: string;
+  img?: string;
   alt: string;
   eyebrow: string;
   title: string;
@@ -23,8 +24,8 @@ type Slide = {
 
 const slides: Slide[] = [
   {
-    img: slideHues,
-    alt: "Woman in pink saree wearing a gold and gemstone necklace",
+    video: heroVideo1,
+    alt: "Srivatsala jewellery — gold and gemstone showcase",
     eyebrow: "A SRIVATSALA SIGNATURE",
     title: "Hues",
     italic: "natural gemstones,",
@@ -51,8 +52,8 @@ const slides: Slide[] = [
     ctaHref: waLink("Hi, I'd like to book a bridal consultation."),
   },
   {
-    img: slideFestive,
-    alt: "Woman in pastel blue saree celebrating festival with gold jewellery",
+    video: heroVideo2,
+    alt: "Srivatsala festive silver and gold jewellery collection",
     eyebrow: "FESTIVAL OF LIGHTS",
     title: "Utsav",
     italic: "festive radiance,",
@@ -66,14 +67,29 @@ const slides: Slide[] = [
   },
 ];
 
+const PeekMedia = ({ slide, className }: { slide: Slide; className: string }) =>
+  slide.video ? (
+    <video
+      src={slide.video}
+      muted
+      playsInline
+      preload="metadata"
+      className={className}
+    />
+  ) : (
+    <img src={slide.img} alt="" className={className} />
+  );
+
 export const HeroSlider = () => {
   const [index, setIndex] = useState(0);
   const [hover, setHover] = useState(false);
+  const [muted, setMuted] = useState(true);
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
   const captionRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const total = slides.length;
 
-  // Set initial states
+  // Set initial GSAP states + start first slide
   useEffect(() => {
     slideRefs.current.forEach((el, i) => {
       if (!el) return;
@@ -83,10 +99,21 @@ export const HeroSlider = () => {
       if (!el) return;
       gsap.set(el, { opacity: i === 0 ? 1 : 0, x: i === 0 ? 0 : 60 });
     });
-    // Ken-Burns slow zoom on active
-    const el = slideRefs.current[0];
-    if (el) gsap.to(el, { scale: 1.08, duration: 8, ease: "none" });
+    // Ken Burns only on image slides
+    if (!slides[0].video) {
+      const el = slideRefs.current[0];
+      if (el) gsap.to(el, { scale: 1.08, duration: 8, ease: "none" });
+    }
+    // Play first video slide
+    videoRefs.current[0]?.play().catch(() => {});
   }, []);
+
+  // Sync muted state to all video elements
+  useEffect(() => {
+    videoRefs.current.forEach((v) => {
+      if (v) v.muted = muted;
+    });
+  }, [muted]);
 
   // Auto-rotate
   useEffect(() => {
@@ -103,17 +130,28 @@ export const HeroSlider = () => {
     const nxtCap = captionRefs.current[next];
     if (!cur || !nxt || !curCap || !nxtCap) return;
 
+    // Pause outgoing video
+    const curVideo = videoRefs.current[index];
+    if (curVideo) { curVideo.pause(); curVideo.currentTime = 0; }
+
     gsap.to(cur, { opacity: 0, duration: 0.9, ease: "power2.inOut" });
     gsap.to(curCap, { opacity: 0, x: -40, duration: 0.5, ease: "power2.in" });
 
-    gsap.fromTo(nxt, { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: 1.1, ease: "power2.out" });
-    gsap.to(nxt, { scale: 1.08, duration: 8, delay: 1.1, ease: "none" });
+    const isNextVideo = !!slides[next].video;
+    gsap.fromTo(nxt, { opacity: 0, scale: isNextVideo ? 1 : 1.08 }, { opacity: 1, scale: 1, duration: 1.1, ease: "power2.out" });
+    if (!isNextVideo) {
+      gsap.to(nxt, { scale: 1.08, duration: 8, delay: 1.1, ease: "none" });
+    }
 
-    gsap.fromTo(
-      nxtCap,
-      { opacity: 0, x: 60 },
-      { opacity: 1, x: 0, duration: 0.9, delay: 0.25, ease: "power3.out" }
-    );
+    gsap.fromTo(nxtCap, { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.9, delay: 0.25, ease: "power3.out" });
+
+    // Play incoming video
+    const nxtVideo = videoRefs.current[next];
+    if (nxtVideo) {
+      nxtVideo.currentTime = 0;
+      nxtVideo.muted = muted;
+      setTimeout(() => nxtVideo.play().catch(() => {}), 300);
+    }
 
     setIndex(next);
   };
@@ -123,6 +161,7 @@ export const HeroSlider = () => {
 
   const prevIdx = (index - 1 + total) % total;
   const nextIdx = (index + 1) % total;
+  const activeIsVideo = !!slides[index].video;
 
   return (
     <section
@@ -131,7 +170,6 @@ export const HeroSlider = () => {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      {/* Side peeks */}
       <div className="container">
         <div className="relative grid grid-cols-12 gap-2 sm:gap-3">
           {/* Prev peek */}
@@ -140,9 +178,8 @@ export const HeroSlider = () => {
             onClick={prev}
             className="hidden md:block col-span-1 relative h-[60vh] min-h-[420px] max-h-[640px] rounded-l-2xl overflow-hidden group"
           >
-            <img
-              src={slides[prevIdx].img}
-              alt=""
+            <PeekMedia
+              slide={slides[prevIdx]}
               className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 transition"
             />
             <div className="absolute inset-0 bg-[hsl(var(--bg-dark)/0.4)] group-hover:bg-[hsl(var(--bg-dark)/0.2)] transition" />
@@ -157,15 +194,29 @@ export const HeroSlider = () => {
                 className="absolute inset-0"
                 aria-hidden={i !== index}
               >
-                <img
-                  src={s.img}
-                  alt={s.alt}
-                  className="absolute inset-0 w-full h-full object-cover"
-                  loading={i === 0 ? "eager" : "lazy"}
-                  width={1920}
-                  height={1080}
-                />
-                {/* Right-side gradient for legibility */}
+                {s.video ? (
+                  <video
+                    ref={(el) => (videoRefs.current[i] = el)}
+                    src={s.video}
+                    muted
+                    playsInline
+                    loop
+                    preload={i === 0 ? "auto" : "metadata"}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    aria-label={s.alt}
+                  />
+                ) : (
+                  <img
+                    src={s.img}
+                    alt={s.alt}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    loading={i === 0 ? "eager" : "lazy"}
+                    width={1920}
+                    height={1080}
+                  />
+                )}
+
+                {/* Gradient overlay for caption legibility */}
                 <div
                   aria-hidden
                   className="absolute inset-0"
@@ -174,7 +225,8 @@ export const HeroSlider = () => {
                       "linear-gradient(90deg, transparent 35%, hsl(213 100% 8% / 0.55) 70%, hsl(213 100% 6% / 0.85) 100%)",
                   }}
                 />
-                {/* Top-left brand watermark */}
+
+                {/* Brand watermark */}
                 <span className="absolute top-5 left-5 text-[10px] tracking-[0.4em] text-silver/85 uppercase border border-silver/30 px-2 py-1 rounded">
                   A Srivatsala Signature
                 </span>
@@ -219,6 +271,17 @@ export const HeroSlider = () => {
               </div>
             ))}
 
+            {/* Mute/unmute — only visible when active slide is video */}
+            {activeIsVideo && (
+              <button
+                aria-label={muted ? "Unmute video" : "Mute video"}
+                onClick={() => setMuted((m) => !m)}
+                className="absolute bottom-12 left-4 z-10 w-9 h-9 grid place-items-center rounded-full bg-[hsl(var(--bg-dark)/0.65)] backdrop-blur border border-silver/20 text-silver hover:text-gold-light hover:border-[hsl(var(--gold-light))] transition"
+              >
+                {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+              </button>
+            )}
+
             {/* Mobile arrows */}
             <button
               aria-label="Previous"
@@ -258,16 +321,15 @@ export const HeroSlider = () => {
             onClick={next}
             className="hidden md:block col-span-1 relative h-[60vh] min-h-[420px] max-h-[640px] rounded-r-2xl overflow-hidden group"
           >
-            <img
-              src={slides[nextIdx].img}
-              alt=""
+            <PeekMedia
+              slide={slides[nextIdx]}
               className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 transition"
             />
             <div className="absolute inset-0 bg-[hsl(var(--bg-dark)/0.4)] group-hover:bg-[hsl(var(--bg-dark)/0.2)] transition" />
           </button>
         </div>
 
-        {/* Eyebrow strip below slider — like Tanishq sub-header */}
+        {/* Eyebrow strip below slider */}
         <div className="mt-8 text-center">
           <p className="text-xs tracking-[0.4em] uppercase text-rose-gold">Madhurawada · Visakhapatnam</p>
           <h1 className="font-display text-3xl sm:text-5xl mt-3 text-silver">
