@@ -15,17 +15,27 @@ export const Atelier = () => (
 
         {/* Founder photo */}
         <div className="relative flex justify-center lg:justify-start">
-          <div className="relative w-72 sm:w-80 lg:w-96">
-            {/* Gold accent line */}
+          <div className="relative w-80 sm:w-[22rem] lg:w-[30rem]">
+            {/* Gold glow halo behind image */}
             <div
-              className="absolute -top-4 -left-4 w-full h-full rounded-2xl"
-              style={{ background: "var(--gradient-gold)", opacity: 0.25 }}
+              className="absolute -inset-3 rounded-3xl"
+              style={{ background: "var(--gradient-gold)", opacity: 0.18, filter: "blur(18px)" }}
+              aria-hidden
+            />
+            {/* Gold accent corner offset */}
+            <div
+              className="absolute -top-3 -left-3 w-full h-full rounded-3xl"
+              style={{ background: "var(--gradient-gold)", opacity: 0.35 }}
               aria-hidden
             />
             <img
               src={founderImg}
               alt="Santosh — Founder & Master Jeweller, Srivatsala Silver House"
-              className="relative rounded-2xl w-full object-cover shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] gold-border"
+              className="relative rounded-3xl w-full object-cover"
+              style={{
+                boxShadow: "0 0 0 3px hsl(44 73% 66% / 0.7), 0 40px 100px -20px rgba(0,0,0,0.8), 0 0 60px hsl(44 73% 66% / 0.2)",
+                aspectRatio: "3/4",
+              }}
               loading="lazy"
             />
             {/* Founder label badge */}
