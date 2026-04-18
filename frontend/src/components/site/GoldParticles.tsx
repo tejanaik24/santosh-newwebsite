@@ -34,21 +34,21 @@ export const GoldParticles = () => {
 
     const tick = () => {
       ctx.clearRect(0, 0, w, h);
+      const t = performance.now();
+      ctx.fillStyle = "rgb(232, 201, 106)";
       for (const p of parts) {
         p.y += p.vy;
         p.x += p.vx;
-        p.a += Math.sin(performance.now() * p.tw) * 0.005;
+        p.a += Math.sin(t * p.tw) * 0.005;
         if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; }
         if (p.x < -10) p.x = w + 10;
         if (p.x > w + 10) p.x = -10;
-        const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 6);
-        grad.addColorStop(0, `rgba(232, 201, 106, ${Math.min(1, Math.max(0.05, p.a))})`);
-        grad.addColorStop(1, "rgba(232, 201, 106, 0)");
-        ctx.fillStyle = grad;
+        ctx.globalAlpha = Math.min(0.9, Math.max(0.05, p.a));
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r * 6, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fill();
       }
+      ctx.globalAlpha = 1;
       raf = requestAnimationFrame(tick);
     };
 

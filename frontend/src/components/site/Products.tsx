@@ -42,7 +42,7 @@ export const Products = () => {
   useEffect(() => {
     if (!gridRef.current) return;
     const cards = gridRef.current.querySelectorAll("[data-product]");
-    gsap.fromTo(
+    const tween = gsap.fromTo(
       cards,
       { opacity: 0, y: 40, scale: 0.97 },
       {
@@ -50,7 +50,7 @@ export const Products = () => {
         scrollTrigger: { trigger: gridRef.current, start: "top 85%", once: false },
       }
     );
-    return () => ScrollTrigger.getAll().forEach((t) => t.trigger === gridRef.current && t.kill());
+    return () => { tween.scrollTrigger?.kill(); tween.kill(); };
   }, [active]);
 
   return (

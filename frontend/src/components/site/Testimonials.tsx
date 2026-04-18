@@ -36,11 +36,10 @@ export const Testimonials = () => (
       <span className="text-xs uppercase tracking-[0.4em] text-rose-gold">Testimonials</span>
       <h2 className="font-display text-4xl sm:text-5xl mt-3 text-silver">Loved by <span className="text-gradient-gold">Vizag families</span></h2>
     </div>
-    <div className="overflow-hidden">
-      <div className="flex" style={{ animation: "tmarq 40s linear infinite" }}>
+    <div className="overflow-hidden group/marq">
+      <div className="flex testimonials-marquee group-hover/marq:[animation-play-state:paused] focus-within:[animation-play-state:paused]">
         {[...reviews, ...reviews].map((r, i) => <Card key={i} r={r} />)}
       </div>
-      <style>{`@keyframes tmarq { from { transform: translateX(0) } to { transform: translateX(-50%) } }`}</style>
     </div>
   </section>
 );

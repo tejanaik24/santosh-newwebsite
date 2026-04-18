@@ -26,11 +26,11 @@ export const AndhraTraditional = () => {
   useEffect(() => {
     if (!ref.current) return;
     const cards = ref.current.querySelectorAll("[data-card]");
-    gsap.from(cards, {
+    const tween = gsap.from(cards, {
       scrollTrigger: { trigger: ref.current, start: "top 75%" },
       opacity: 0, y: 60, stagger: 0.08, duration: 0.9, ease: "power3.out",
     });
-    return () => ScrollTrigger.getAll().forEach((t) => t.trigger === ref.current && t.kill());
+    return () => { tween.scrollTrigger?.kill(); tween.kill(); };
   }, []);
 
   return (

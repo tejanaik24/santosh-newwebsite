@@ -29,11 +29,11 @@ export const Categories = () => {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!ref.current) return;
-    gsap.from(ref.current.querySelectorAll("[data-cat]"), {
+    const tween = gsap.from(ref.current.querySelectorAll("[data-cat]"), {
       scrollTrigger: { trigger: ref.current, start: "top 80%" },
       opacity: 0, y: 50, stagger: 0.06, duration: 0.7, ease: "power3.out",
     });
-    return () => ScrollTrigger.getAll().forEach((t) => t.trigger === ref.current && t.kill());
+    return () => { tween.scrollTrigger?.kill(); tween.kill(); };
   }, []);
 
   return (
@@ -56,7 +56,7 @@ export const Categories = () => {
               data-testid={`category-${c.name.toLowerCase().replace(/\s+/g, "-")}`}
               className="group snap-center shrink-0 lg:shrink flex flex-col items-center gap-3 w-28 lg:w-auto"
             >
-              <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden gold-border transition-transform duration-500 group-hover:scale-105 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]">
+              <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden gold-border shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]">
                 <img
                   src={c.img}
                   alt={c.name}

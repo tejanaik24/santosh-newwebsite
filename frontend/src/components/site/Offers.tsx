@@ -15,13 +15,14 @@ export const Offers = () => {
   useEffect(() => {
     if (!ref.current) return;
     const cards = ref.current.querySelectorAll<HTMLElement>("[data-offer]");
+    const tweens: gsap.core.Tween[] = [];
     cards.forEach((el, i) => {
-      gsap.from(el, {
+      tweens.push(gsap.from(el, {
         opacity: 0, x: i % 2 === 0 ? -60 : 60, duration: 0.9, ease: "power3.out",
         scrollTrigger: { trigger: el, start: "top 85%" },
-      });
+      }));
     });
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+    return () => tweens.forEach((t) => { t.scrollTrigger?.kill(); t.kill(); });
   }, []);
 
   return (

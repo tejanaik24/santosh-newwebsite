@@ -15,25 +15,31 @@ const links = [
 
 export const Nav = () => {
   const ref = useRef<HTMLElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
   const lastY = useRef(0);
 
   useEffect(() => {
+    const yTo = gsap.quickTo(ref.current, "y", { duration: 0.4, ease: "power3.out" });
     const onScroll = () => {
       const y = window.scrollY;
       setSolid(y > 40);
       const goingDown = y > lastY.current && y > 200;
-      gsap.to(ref.current, {
-        y: goingDown ? -120 : 0,
-        duration: 0.4,
-        ease: "power3.out",
-      });
+      yTo(goingDown ? -120 : 0);
       lastY.current = y;
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (!overlayRef.current) return;
+    const links = overlayRef.current.querySelectorAll("a, p");
+    if (open) {
+      gsap.fromTo(links, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.06, ease: "power3.out", delay: 0.15 });
+    }
+  }, [open]);
 
   return (
     <>
@@ -84,6 +90,7 @@ export const Nav = () => {
 
       {/* Mobile overlay */}
       <div
+        ref={overlayRef}
         className={`fixed inset-0 z-[60] bg-[hsl(var(--bg-dark))]/98 backdrop-blur-xl transition-all duration-500 ${
           open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
@@ -95,13 +102,12 @@ export const Nav = () => {
           </button>
         </div>
         <nav className="container mt-10 flex flex-col gap-6">
-          {links.map((l, i) => (
+          {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
               className="font-display text-3xl text-silver hover:text-gold-light transition-colors"
-              style={{ transitionDelay: `${i * 40}ms` }}
             >
               {l.label}
             </a>

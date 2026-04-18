@@ -21,32 +21,28 @@ export const WhyUs = () => {
   const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const tweens: gsap.core.Tween[] = [];
     if (ref.current) {
-      gsap.from(ref.current.querySelectorAll("[data-feat]"), {
+      tweens.push(gsap.from(ref.current.querySelectorAll("[data-feat]"), {
         scrollTrigger: { trigger: ref.current, start: "top 80%" },
         opacity: 0, y: 50, stagger: 0.12, duration: 0.8, ease: "power3.out",
-      });
+      }));
     }
     if (statsRef.current) {
       const counters = statsRef.current.querySelectorAll<HTMLElement>("[data-counter]");
       counters.forEach((el) => {
         const target = Number(el.dataset.counter || 0);
-        gsap.fromTo(
-          { v: 0 },
-          { v: 0 },
-          {
-            v: target,
-            duration: 2,
-            ease: "power2.out",
-            scrollTrigger: { trigger: el, start: "top 85%" },
-            onUpdate: function () {
-              el.textContent = Math.round(this.targets()[0].v).toString();
-            },
-          }
-        );
+        const obj = { v: 0 };
+        tweens.push(gsap.to(obj, {
+          v: target,
+          duration: 2,
+          ease: "power2.out",
+          scrollTrigger: { trigger: el, start: "top 85%" },
+          onUpdate() { el.textContent = Math.round(obj.v).toString(); },
+        }));
       });
     }
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+    return () => tweens.forEach((t) => { t.scrollTrigger?.kill(); t.kill(); });
   }, []);
 
   return (

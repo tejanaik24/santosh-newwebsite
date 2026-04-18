@@ -8,6 +8,13 @@ const cols = [
   { title: "Services", items: ["Custom Orders", "Gold Savings Scheme", "Exchange Policy", "Free Vizag Delivery"] },
 ];
 
+const socialLinks = [
+  { Icon: Instagram, href: SITE.social.instagram, label: "Instagram" },
+  { Icon: Facebook, href: SITE.social.facebook, label: "Facebook" },
+  { Icon: Youtube, href: SITE.social.youtube, label: "YouTube" },
+  { Icon: MessageCircle, href: waLink(), label: "WhatsApp" },
+];
+
 export const Footer = () => (
   <footer className="relative bg-[hsl(var(--bg-dark))] mt-12">
     <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "var(--gradient-gold)", boxShadow: "0 0 20px hsl(44 73% 66% / 0.5)" }} />
@@ -19,9 +26,9 @@ export const Footer = () => (
             {SITE.address}
           </p>
           <div className="flex gap-3 mt-6">
-            {[Facebook, Instagram, Youtube, MessageCircle].map((I, i) => (
-              <a key={i} href={i === 3 ? waLink() : "#"} target="_blank" rel="noopener" className="w-10 h-10 grid place-items-center rounded-full border border-[hsl(var(--gold)/0.3)] text-silver hover:text-gold-light hover:border-[hsl(var(--gold-light))] transition">
-                <I size={16} />
+            {socialLinks.filter((s) => s.href).map(({ Icon, href, label }) => (
+              <a key={label} href={href} aria-label={label} target="_blank" rel="noopener" className="w-10 h-10 grid place-items-center rounded-full border border-[hsl(var(--gold)/0.3)] text-silver hover:text-gold-light hover:border-[hsl(var(--gold-light))] transition">
+                <Icon size={16} />
               </a>
             ))}
           </div>

@@ -9,6 +9,12 @@ export const SITE = {
   whatsappMessage:
     "Hi Srivatsala Silver House, I want to enquire about jewellery",
   hours: "Mon–Sun · 10:30 AM – 9:00 PM",
+  // Social links — update with actual profile URLs
+  social: {
+    instagram: "", // e.g. "https://instagram.com/srivatsalasilverhouse"
+    facebook: "",  // e.g. "https://facebook.com/srivatsalasilverhouse"
+    youtube: "",   // e.g. "https://youtube.com/@srivatsalasilverhouse"
+  },
 };
 
 export const waLink = (msg = SITE.whatsappMessage) =>
