@@ -67,18 +67,7 @@ const slides: Slide[] = [
   },
 ];
 
-const PeekMedia = ({ slide, className }: { slide: Slide; className: string }) =>
-  slide.video ? (
-    <video
-      src={slide.video}
-      muted
-      playsInline
-      preload="metadata"
-      className={className}
-    />
-  ) : (
-    <img src={slide.img} alt="" className={className} />
-  );
+const AUTO_MS = 6000;
 
 export const HeroSlider = () => {
   const [index, setIndex] = useState(0);
@@ -87,68 +76,81 @@ export const HeroSlider = () => {
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
   const captionRefs = useRef<(HTMLDivElement | null)[]>([]);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
-  const stageRef = useRef<HTMLDivElement>(null);
-  const xTo = useRef<ReturnType<typeof gsap.quickTo> | null>(null);
-  const yTo = useRef<ReturnType<typeof gsap.quickTo> | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
   const total = slides.length;
 
-  // Set initial GSAP states + start first slide
+  // Initial setup — stagger-reveal first caption on mount
   useEffect(() => {
     slideRefs.current.forEach((el, i) => {
       if (!el) return;
-      gsap.set(el, { opacity: i === 0 ? 1 : 0, scale: i === 0 ? 1 : 1.05 });
+      gsap.set(el, { opacity: i === 0 ? 1 : 0, scale: i === 0 ? 1 : 1.04 });
     });
     captionRefs.current.forEach((el, i) => {
       if (!el) return;
-      gsap.set(el, { opacity: i === 0 ? 1 : 0, x: i === 0 ? 0 : 60 });
+      const kids = Array.from(el.children);
+      if (i === 0) {
+        gsap.fromTo(kids,
+          { opacity: 0, y: 38 },
+          { opacity: 1, y: 0, duration: 1, stagger: 0.13, delay: 0.5, ease: "power3.out" }
+        );
+      } else {
+        gsap.set(kids, { opacity: 0, y: 38 });
+      }
     });
-    // Ken Burns only on image slides
     if (!slides[0].video) {
       const el = slideRefs.current[0];
-      if (el) gsap.to(el, { scale: 1.08, duration: 8, ease: "none" });
+      if (el) gsap.to(el, { scale: 1.09, duration: 9, ease: "none" });
     }
-    // Play first video slide
     videoRefs.current[0]?.play().catch(() => {});
   }, []);
 
-  // Sync muted state to all video elements
+  // Mute sync
   useEffect(() => {
-    videoRefs.current.forEach((v) => {
-      if (v) v.muted = muted;
-    });
+    videoRefs.current.forEach((v) => { if (v) v.muted = muted; });
   }, [muted]);
 
-  // 3D parallax — init quickTo targets once
+  // Progress bar — animate on each index change
   useEffect(() => {
-    const activeCaption = captionRefs.current[0];
-    if (!activeCaption) return;
-    xTo.current = gsap.quickTo(activeCaption, "rotateY", { duration: 0.6, ease: "power2.out" });
-    yTo.current = gsap.quickTo(activeCaption, "rotateX", { duration: 0.6, ease: "power2.out" });
-  }, []);
+    const bar = progressRef.current;
+    if (!bar) return;
+    gsap.killTweensOf(bar);
+    gsap.fromTo(bar,
+      { scaleX: 0 },
+      { scaleX: 1, duration: AUTO_MS / 1000, ease: "none", transformOrigin: "left center" }
+    );
+  }, [index]);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const el = stageRef.current;
+  // Auto-rotate
+  useEffect(() => {
+    if (hover) return;
+    const t = setTimeout(() => goTo((index + 1) % total), AUTO_MS);
+    return () => clearTimeout(t);
+  }, [index, hover, total]);
+
+  // 3D parallax on mouse move
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const el = sectionRef.current;
     if (!el) return;
     const { left, top, width, height } = el.getBoundingClientRect();
     const nx = ((e.clientX - left) / width - 0.5) * 2;
     const ny = ((e.clientY - top) / height - 0.5) * 2;
     const cap = captionRefs.current[index];
     if (cap) {
-      gsap.to(cap, { rotateY: nx * 6, rotateX: -ny * 4, transformPerspective: 900, duration: 0.5, ease: "power2.out" });
+      gsap.to(cap, {
+        rotateY: nx * 5,
+        rotateX: -ny * 3,
+        transformPerspective: 1100,
+        duration: 0.5,
+        ease: "power2.out",
+      });
     }
   };
 
   const handleMouseLeave = () => {
     const cap = captionRefs.current[index];
-    if (cap) gsap.to(cap, { rotateY: 0, rotateX: 0, duration: 0.8, ease: "elastic.out(1,0.5)" });
+    if (cap) gsap.to(cap, { rotateY: 0, rotateX: 0, duration: 0.9, ease: "elastic.out(1, 0.5)" });
   };
-
-  // Auto-rotate
-  useEffect(() => {
-    if (hover) return;
-    const t = setTimeout(() => goTo((index + 1) % total), 6000);
-    return () => clearTimeout(t);
-  }, [index, hover, total]);
 
   const goTo = (next: number) => {
     if (next === index) return;
@@ -158,27 +160,39 @@ export const HeroSlider = () => {
     const nxtCap = captionRefs.current[next];
     if (!cur || !nxt || !curCap || !nxtCap) return;
 
+    // Kill progress tween on current bar before index change
+    if (progressRef.current) gsap.killTweensOf(progressRef.current);
+
     // Pause outgoing video
     const curVideo = videoRefs.current[index];
     if (curVideo) { curVideo.pause(); curVideo.currentTime = 0; }
 
-    gsap.to(cur, { opacity: 0, duration: 0.9, ease: "power2.inOut" });
-    gsap.to(curCap, { opacity: 0, x: -40, duration: 0.5, ease: "power2.in" });
+    // Outgoing: quick fade + slight scale out
+    gsap.to(cur, { opacity: 0, scale: 1.03, duration: 0.42, ease: "power2.in" });
+    gsap.to(Array.from(curCap.children), {
+      opacity: 0, y: -22, duration: 0.28, stagger: 0.04, ease: "power2.in",
+    });
 
+    // Incoming: cross-fade + staggered caption elements
     const isNextVideo = !!slides[next].video;
-    gsap.fromTo(nxt, { opacity: 0, scale: isNextVideo ? 1 : 1.08 }, { opacity: 1, scale: 1, duration: 1.1, ease: "power2.out" });
+    gsap.fromTo(nxt,
+      { opacity: 0, scale: isNextVideo ? 1 : 1.06 },
+      { opacity: 1, scale: 1, duration: 0.68, delay: 0.28, ease: "power2.out" }
+    );
     if (!isNextVideo) {
-      gsap.to(nxt, { scale: 1.08, duration: 8, delay: 1.1, ease: "none" });
+      gsap.to(nxt, { scale: 1.09, duration: 9, delay: 0.96, ease: "none" });
     }
-
-    gsap.fromTo(nxtCap, { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.9, delay: 0.25, ease: "power3.out" });
+    gsap.fromTo(Array.from(nxtCap.children),
+      { opacity: 0, y: 42 },
+      { opacity: 1, y: 0, duration: 0.82, stagger: 0.11, delay: 0.44, ease: "power3.out" }
+    );
 
     // Play incoming video
     const nxtVideo = videoRefs.current[next];
     if (nxtVideo) {
       nxtVideo.currentTime = 0;
       nxtVideo.muted = muted;
-      setTimeout(() => nxtVideo.play().catch(() => {}), 300);
+      setTimeout(() => nxtVideo.play().catch(() => {}), 340);
     }
 
     setIndex(next);
@@ -186,208 +200,225 @@ export const HeroSlider = () => {
 
   const next = () => goTo((index + 1) % total);
   const prev = () => goTo((index - 1 + total) % total);
-
-  const prevIdx = (index - 1 + total) % total;
-  const nextIdx = (index + 1) % total;
   const activeIsVideo = !!slides[index].video;
 
   return (
     <section
       id="home"
-      className="relative h-screen min-h-[640px] flex flex-col pt-20"
+      ref={sectionRef}
+      className="relative h-screen w-full overflow-hidden"
       onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
+      onMouseLeave={() => { setHover(false); handleMouseLeave(); }}
+      onMouseMove={handleMouseMove}
     >
-      {/* Full-bleed outer gold glow ring — the "highlight" */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-4 top-20 bottom-0 rounded-3xl -z-0"
-        style={{
-          boxShadow: "0 0 80px -10px hsl(44 73% 50% / 0.45), 0 0 200px -40px hsl(44 73% 50% / 0.2)",
-        }}
-      />
-
-      <div className="container flex-1 flex flex-col pb-4">
-        <div className="relative grid grid-cols-12 gap-2 sm:gap-3 flex-1 min-h-0">
-
-          {/* Prev peek */}
-          <button
-            aria-label="Previous slide"
-            onClick={prev}
-            className="hidden md:flex col-span-1 relative rounded-l-2xl overflow-hidden group"
-          >
-            <PeekMedia
-              slide={slides[prevIdx]}
-              className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 transition"
+      {/* ── Slides ──────────────────────────────────────── */}
+      {slides.map((s, i) => (
+        <div
+          key={i}
+          ref={(el) => { slideRefs.current[i] = el; }}
+          className="absolute inset-0"
+          aria-hidden={i !== index}
+        >
+          {s.video ? (
+            <video
+              ref={(el) => { videoRefs.current[i] = el; }}
+              src={s.video}
+              muted playsInline loop
+              preload={i === 0 ? "auto" : "metadata"}
+              className="absolute inset-0 w-full h-full object-cover"
+              aria-label={s.alt}
             />
-            <div className="absolute inset-0 bg-[hsl(var(--bg-dark)/0.4)] group-hover:bg-[hsl(var(--bg-dark)/0.2)] transition" />
-          </button>
+          ) : (
+            <img
+              src={s.img} alt={s.alt}
+              className="absolute inset-0 w-full h-full object-cover"
+              loading={i === 0 ? "eager" : "lazy"}
+              width={1920} height={1080}
+            />
+          )}
 
-          {/* Main stage — fills remaining height */}
+          {/* Multi-layer cinematic overlay */}
           <div
-            ref={stageRef}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            className="col-span-12 md:col-span-10 relative rounded-2xl overflow-hidden bg-navy-dark"
+            aria-hidden
+            className="absolute inset-0"
             style={{
-              border: "1px solid hsl(44 73% 50% / 0.5)",
-              boxShadow: "0 0 0 1px hsl(44 73% 50% / 0.15), inset 0 0 60px -20px hsl(44 73% 50% / 0.08)",
+              background: [
+                /* right-side dark panel for caption legibility */
+                "linear-gradient(to right, hsl(213 100% 8% / 0.1) 0%, transparent 28%, hsl(213 100% 6% / 0.62) 62%, hsl(213 100% 5% / 0.94) 100%)",
+                /* top vignette — nav readability */
+                "linear-gradient(to bottom, hsl(213 100% 5% / 0.52) 0%, transparent 18%)",
+                /* bottom vignette — store tag */
+                "linear-gradient(to top, hsl(213 100% 4% / 0.9) 0%, transparent 28%)",
+              ].join(", "),
+            }}
+          />
+
+          {/* Brand stamp */}
+          <span className="absolute top-24 left-8 sm:left-14 text-[9px] tracking-[0.5em] text-silver/65 uppercase border border-silver/18 px-3 py-1 rounded-sm backdrop-blur-sm z-10 font-medium">
+            Srivatsala · Est. 1998
+          </span>
+        </div>
+      ))}
+
+      {/* ── Captions (one per slide, staggered per-element) ── */}
+      {slides.map((s, i) => (
+        <div
+          key={i}
+          ref={(el) => { captionRefs.current[i] = el; }}
+          className="absolute right-8 sm:right-14 lg:right-20 xl:right-28 top-1/2 -translate-y-1/2 max-w-xs sm:max-w-sm lg:max-w-md text-right z-10"
+          aria-hidden={i !== index}
+        >
+          {/* Eyebrow */}
+          <p className="text-[10px] sm:text-[11px] tracking-[0.5em] text-rose-gold uppercase mb-4 font-semibold">
+            {s.eyebrow}
+          </p>
+
+          {/* Hero title */}
+          <h2 className="font-display text-[4.5rem] sm:text-8xl lg:text-9xl xl:text-[10rem] text-silver leading-[0.88] tracking-tight">
+            {s.title}
+          </h2>
+
+          {/* Subtitle italic */}
+          <p className="font-display italic text-xl sm:text-2xl lg:text-3xl text-silver/80 mt-4 lg:mt-5 leading-snug">
+            {s.italic}
+            <br />
+            {s.subtitle}
+          </p>
+
+          {/* Offer card */}
+          <div
+            className="mt-6 lg:mt-8 inline-block text-left rounded-xl px-5 py-4 relative overflow-hidden"
+            style={{
+              background: "linear-gradient(135deg, hsl(213 100% 8% / 0.8) 0%, hsl(213 80% 12% / 0.65) 100%)",
+              backdropFilter: "blur(14px)",
+              border: "1px solid hsl(44 73% 58% / 0.45)",
+              boxShadow:
+                "0 12px 40px -10px hsl(44 56% 54% / 0.28), inset 0 1px 0 hsl(44 73% 80% / 0.12)",
             }}
           >
-            {slides.map((s, i) => (
-              <div
-                key={i}
-                ref={(el) => (slideRefs.current[i] = el)}
-                className="absolute inset-0"
-                aria-hidden={i !== index}
-              >
-                {s.video ? (
-                  <video
-                    ref={(el) => (videoRefs.current[i] = el)}
-                    src={s.video}
-                    muted
-                    playsInline
-                    loop
-                    preload={i === 0 ? "auto" : "metadata"}
-                    className="absolute inset-0 w-full h-full object-cover"
-                    aria-label={s.alt}
-                  />
-                ) : (
-                  <img
-                    src={s.img}
-                    alt={s.alt}
-                    className="absolute inset-0 w-full h-full object-cover"
-                    loading={i === 0 ? "eager" : "lazy"}
-                    width={1920}
-                    height={1080}
-                  />
-                )}
+            {/* Top shimmer line */}
+            <div
+              aria-hidden
+              className="absolute top-0 left-0 right-0 h-px"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent 0%, hsl(44 73% 72% / 0.9) 50%, transparent 100%)",
+              }}
+            />
+            <p className="font-display text-3xl sm:text-4xl text-gold-light leading-tight">
+              {s.offerLine1}
+            </p>
+            <p className="text-[11px] tracking-widest text-silver/80 mt-1 font-medium uppercase">
+              {s.offerLine2}
+            </p>
+            <p className="text-[10px] sm:text-[11px] text-silver/55 mt-2.5 leading-relaxed">
+              {s.offerNote}
+            </p>
+          </div>
 
-                {/* Gradient overlay */}
+          {/* Period */}
+          <p className="text-[10px] text-silver/45 mt-3 tracking-wide">{s.period}</p>
+
+          {/* CTA */}
+          <div className="mt-6 flex justify-end">
+            <a
+              href={s.ctaHref}
+              target={s.ctaHref.startsWith("http") ? "_blank" : undefined}
+              rel="noopener"
+              className="btn-gold !py-3 !px-8 text-[13px] cursor-pointer"
+            >
+              {s.cta}
+            </a>
+          </div>
+        </div>
+      ))}
+
+      {/* ── Bottom-left store identity ───────────────────── */}
+      <div className="absolute bottom-[5.5rem] sm:bottom-[6.5rem] left-8 sm:left-14 lg:left-20 z-10">
+        <p className="text-[9px] tracking-[0.5em] uppercase text-rose-gold mb-1.5 font-medium">
+          Madhurawada · Visakhapatnam
+        </p>
+        <h1 className="font-display text-lg sm:text-xl lg:text-2xl text-silver leading-tight">
+          For an{" "}
+          <span className="text-gradient-gold">Auspicious Beginning</span>
+        </h1>
+      </div>
+
+      {/* ── Arrow controls ──────────────────────────────── */}
+      <button
+        aria-label="Previous slide"
+        onClick={prev}
+        className="absolute left-4 sm:left-5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 grid place-items-center rounded-full bg-[hsl(var(--bg-dark)/0.5)] backdrop-blur border border-silver/15 text-silver/70 hover:text-gold-light hover:border-[hsl(var(--gold)/0.55)] hover:bg-[hsl(var(--bg-dark)/0.75)] transition-all duration-200 cursor-pointer"
+      >
+        <ChevronLeft size={19} />
+      </button>
+      <button
+        aria-label="Next slide"
+        onClick={next}
+        className="absolute right-4 sm:right-5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 grid place-items-center rounded-full bg-[hsl(var(--bg-dark)/0.5)] backdrop-blur border border-silver/15 text-silver/70 hover:text-gold-light hover:border-[hsl(var(--gold)/0.55)] hover:bg-[hsl(var(--bg-dark)/0.75)] transition-all duration-200 cursor-pointer"
+      >
+        <ChevronRight size={19} />
+      </button>
+
+      {/* ── Mute toggle ─────────────────────────────────── */}
+      {activeIsVideo && (
+        <button
+          aria-label={muted ? "Unmute video" : "Mute video"}
+          onClick={() => setMuted((m) => !m)}
+          className="absolute bottom-[5.5rem] sm:bottom-[6.5rem] right-8 sm:right-14 z-20 w-9 h-9 grid place-items-center rounded-full bg-[hsl(var(--bg-dark)/0.6)] backdrop-blur border border-silver/20 text-silver/70 hover:text-gold-light hover:border-[hsl(var(--gold-light))] transition-all duration-200 cursor-pointer"
+        >
+          {muted ? <VolumeX size={15} /> : <Volume2 size={15} />}
+        </button>
+      )}
+
+      {/* ── Slide counter + progress dots ───────────────── */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3">
+        <p className="text-[9px] tracking-[0.35em] text-silver/35 tabular-nums font-medium">
+          0{index + 1}&nbsp;/&nbsp;0{total}
+        </p>
+        <div className="flex items-center gap-2.5">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              aria-label={`Slide ${i + 1}`}
+              onClick={() => goTo(i)}
+              className={`relative h-[3px] rounded-full overflow-hidden cursor-pointer transition-all duration-300 ${
+                i === index ? "w-12" : "w-3.5 bg-silver/25 hover:bg-silver/45"
+              }`}
+              style={
+                i === index
+                  ? { background: "hsl(var(--bg-dark) / 0.4)" }
+                  : {}
+              }
+            >
+              {i === index && (
                 <div
-                  aria-hidden
+                  ref={progressRef}
                   className="absolute inset-0"
                   style={{
                     background:
-                      "linear-gradient(90deg, rgba(5,10,30,0.25) 0%, transparent 35%, hsl(213 100% 8% / 0.55) 70%, hsl(213 100% 6% / 0.88) 100%), linear-gradient(180deg, transparent 50%, rgba(5,10,30,0.7) 100%)",
+                      "linear-gradient(90deg, hsl(44 73% 66%), hsl(44 56% 54%))",
+                    transformOrigin: "left center",
                   }}
                 />
-
-                {/* Brand watermark */}
-                <span className="absolute top-5 left-5 text-[10px] tracking-[0.4em] text-silver/85 uppercase border border-silver/30 px-2 py-1 rounded backdrop-blur-sm">
-                  A Srivatsala Signature
-                </span>
-
-                {/* Caption */}
-                <div
-                  ref={(el) => (captionRefs.current[i] = el)}
-                  className="absolute right-6 sm:right-10 top-1/2 -translate-y-1/2 max-w-md text-right"
-                >
-                  <p className="text-[10px] sm:text-xs tracking-[0.4em] text-rose-gold uppercase mb-3">
-                    {s.eyebrow}
-                  </p>
-                  <h2 className="font-display text-6xl sm:text-7xl lg:text-8xl text-silver leading-none">
-                    {s.title}
-                  </h2>
-                  <p className="font-display italic text-2xl sm:text-3xl text-silver/90 mt-3">
-                    {s.italic}
-                    <br />
-                    {s.subtitle}
-                  </p>
-                  <div className="mt-6 inline-block text-left bg-[hsl(var(--bg-dark)/0.6)] backdrop-blur-sm border border-[hsl(var(--gold)/0.4)] rounded-lg px-5 py-4">
-                    <p className="font-display text-3xl text-gold-light leading-tight">
-                      {s.offerLine1}
-                    </p>
-                    <p className="text-xs tracking-wider text-silver/85 mt-0.5">
-                      {s.offerLine2}
-                    </p>
-                    <p className="text-[10px] text-silver/60 mt-2">{s.offerNote}</p>
-                  </div>
-                  <p className="text-[10px] text-silver/55 mt-3 tracking-wide">{s.period}</p>
-                  <div className="mt-5 flex justify-end">
-                    <a
-                      href={s.ctaHref}
-                      target={s.ctaHref.startsWith("http") ? "_blank" : undefined}
-                      rel="noopener"
-                      className="btn-gold !py-2.5 !px-6 text-sm"
-                    >
-                      {s.cta}
-                    </a>
-                  </div>
-                </div>
-
-                {/* Eyebrow strip — bottom-left overlay */}
-                {i === index && (
-                  <div className="absolute bottom-16 left-5 sm:left-8">
-                    <p className="text-[10px] tracking-[0.4em] uppercase text-rose-gold mb-1">
-                      Madhurawada · Visakhapatnam
-                    </p>
-                    <h1 className="font-display text-xl sm:text-2xl text-silver leading-tight">
-                      For an{" "}
-                      <span className="text-gradient-gold">Auspicious Beginning</span>
-                    </h1>
-                  </div>
-                )}
-              </div>
-            ))}
-
-            {/* Mute/unmute */}
-            {activeIsVideo && (
-              <button
-                aria-label={muted ? "Unmute video" : "Mute video"}
-                onClick={() => setMuted((m) => !m)}
-                className="absolute bottom-12 right-4 z-10 w-9 h-9 grid place-items-center rounded-full bg-[hsl(var(--bg-dark)/0.65)] backdrop-blur border border-silver/20 text-silver hover:text-gold-light hover:border-[hsl(var(--gold-light))] transition"
-              >
-                {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-              </button>
-            )}
-
-            {/* Mobile arrows */}
-            <button
-              aria-label="Previous"
-              onClick={prev}
-              className="md:hidden absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 grid place-items-center rounded-full bg-[hsl(var(--bg-dark)/0.6)] backdrop-blur text-silver"
-            >
-              <ChevronLeft size={20} />
+              )}
             </button>
-            <button
-              aria-label="Next"
-              onClick={next}
-              className="md:hidden absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 grid place-items-center rounded-full bg-[hsl(var(--bg-dark)/0.6)] backdrop-blur text-silver"
-            >
-              <ChevronRight size={20} />
-            </button>
-
-            {/* Dots */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2.5 z-10">
-              {slides.map((_, i) => (
-                <button
-                  key={i}
-                  aria-label={`Go to slide ${i + 1}`}
-                  onClick={() => goTo(i)}
-                  className={`h-2 rounded-full transition-all ${
-                    i === index
-                      ? "w-8 bg-[hsl(var(--gold-light))]"
-                      : "w-2 bg-silver/40 hover:bg-silver/70"
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Next peek */}
-          <button
-            aria-label="Next slide"
-            onClick={next}
-            className="hidden md:flex col-span-1 relative rounded-r-2xl overflow-hidden group"
-          >
-            <PeekMedia
-              slide={slides[nextIdx]}
-              className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 transition"
-            />
-            <div className="absolute inset-0 bg-[hsl(var(--bg-dark)/0.4)] group-hover:bg-[hsl(var(--bg-dark)/0.2)] transition" />
-          </button>
+          ))}
         </div>
+      </div>
+
+      {/* ── Scroll nudge ────────────────────────────────── */}
+      <div className="absolute bottom-3 left-8 sm:left-14 z-10 flex items-center gap-2 opacity-30">
+        <div
+          aria-hidden
+          className="w-px h-7"
+          style={{
+            background: "linear-gradient(to bottom, transparent, hsl(60 4% 89% / 0.7))",
+          }}
+        />
+        <svg width="9" height="5" viewBox="0 0 9 5" className="text-silver animate-bounce-soft">
+          <path d="M1 1l3.5 3L8 1" stroke="currentColor" strokeWidth="1.4" fill="none" strokeLinecap="round" />
+        </svg>
       </div>
     </section>
   );
