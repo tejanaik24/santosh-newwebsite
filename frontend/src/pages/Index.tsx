@@ -11,6 +11,7 @@ import { WhyUs } from "@/components/site/WhyUs";
 import { Offers } from "@/components/site/Offers";
 import { Testimonials } from "@/components/site/Testimonials";
 import { Location } from "@/components/site/Location";
+import { Atelier } from "@/components/site/Atelier";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppFab } from "@/components/site/WhatsAppFab";
 
@@ -31,6 +32,7 @@ const Index = () => {
         <Offers />
         <Testimonials />
         <Location />
+        <Atelier />
       </main>
       <Footer />
       <WhatsAppFab />
