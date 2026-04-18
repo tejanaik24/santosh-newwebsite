@@ -1,4 +1,9 @@
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Star } from "lucide-react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const reviews = [
   { name: "Lakshmi Prasanna", city: "MVP Colony, Vizag", text: "Beautiful kasulaperu for my wedding. The craftsmanship is unmatched in Visakhapatnam." },
@@ -11,7 +16,7 @@ const reviews = [
 
 const Card = ({ r }: { r: (typeof reviews)[number] }) => (
   <article className="shrink-0 w-[320px] sm:w-[380px] luxury-card rounded-2xl p-7 gold-border mr-5">
-    <span className="font-display text-5xl text-rose-gold leading-none block">“</span>
+    <span className="font-display text-5xl text-rose-gold leading-none block">"</span>
     <p className="text-silver/85 text-sm leading-relaxed mt-2">{r.text}</p>
     <div className="flex gap-1 mt-5">
       {Array.from({ length: 5 }).map((_, i) => (
@@ -30,16 +35,37 @@ const Card = ({ r }: { r: (typeof reviews)[number] }) => (
   </article>
 );
 
-export const Testimonials = () => (
-  <section className="py-24 sm:py-32 overflow-hidden">
-    <div className="container text-center max-w-2xl mx-auto mb-14">
-      <span className="text-xs uppercase tracking-[0.4em] text-rose-gold">Testimonials</span>
-      <h2 className="font-display text-4xl sm:text-5xl mt-3 text-silver">Loved by <span className="text-gradient-gold">Vizag families</span></h2>
-    </div>
-    <div className="overflow-hidden group/marq">
-      <div className="flex testimonials-marquee group-hover/marq:[animation-play-state:paused] focus-within:[animation-play-state:paused]">
-        {[...reviews, ...reviews].map((r, i) => <Card key={i} r={r} />)}
+export const Testimonials = () => {
+  const headRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!headRef.current) return;
+    const ctx = gsap.context(() => {
+      gsap.from(Array.from(headRef.current!.children), {
+        scrollTrigger: { trigger: headRef.current, start: "top 85%" },
+        opacity: 0,
+        y: 28,
+        stagger: 0.1,
+        duration: 0.7,
+        ease: "power3.out",
+      });
+    }, headRef);
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section className="py-24 sm:py-32 overflow-hidden">
+      <div ref={headRef} className="container text-center max-w-2xl mx-auto mb-14">
+        <span className="text-xs uppercase tracking-[0.4em] text-rose-gold block">Testimonials</span>
+        <h2 className="font-display text-4xl sm:text-5xl mt-3 text-silver">
+          Loved by <span className="text-gradient-gold">Vizag families</span>
+        </h2>
       </div>
-    </div>
-  </section>
-);
+      <div className="overflow-hidden group/marq">
+        <div className="flex testimonials-marquee group-hover/marq:[animation-play-state:paused] focus-within:[animation-play-state:paused]">
+          {[...reviews, ...reviews].map((r, i) => <Card key={i} r={r} />)}
+        </div>
+      </div>
+    </section>
+  );
+};
