@@ -11,13 +11,13 @@ const U = (id: string) =>
 const designs: { name: string; desc: string; img: string }[] = [
   { name: "Vaddanam", desc: "Ornate bridal waist belt", img: productVaddanam },
   { name: "Kasulaperu", desc: "Lakshmi coin necklace", img: productKasulaperu },
-  { name: "Gundla Haram", desc: "Long beaded necklace", img: U("1611652022419-a9419f74343d") },
+  { name: "Gundla Haram", desc: "Long beaded necklace", img: U("1758995115518-26f90aa61b97") },
   { name: "Jhumkas", desc: "Bell-shaped earrings", img: productJhumka },
-  { name: "Mango Mala", desc: "Mango motif necklace", img: U("1573408301185-9146fe634ad0") },
-  { name: "Nethichutti", desc: "Forehead ornament", img: U("1600721391776-b5cd0e0048f9") },
-  { name: "Vanki", desc: "Armlet with gem inlay", img: U("1580227974546-fbd48825d991") },
-  { name: "Buttalu", desc: "Stud earrings", img: U("1543294001-f7cd5d7fb516") },
-  { name: "Mattelu", desc: "Silver toe rings", img: U("1617038220319-276d3cfab638") },
+  { name: "Mango Mala", desc: "Mango motif necklace", img: U("1760786933663-327c858d5434") },
+  { name: "Nethichutti", desc: "Forehead ornament", img: U("1760080839074-07e553b0565e") },
+  { name: "Vanki", desc: "Armlet with gem inlay", img: U("1723084071339-16dcb38f4524") },
+  { name: "Buttalu", desc: "Stud earrings", img: U("1626784215013-13322cb0e471") },
+  { name: "Mattelu", desc: "Silver toe rings", img: U("1773574953605-f64fa2750efc") },
 ];
 
 export const AndhraTraditional = () => {
