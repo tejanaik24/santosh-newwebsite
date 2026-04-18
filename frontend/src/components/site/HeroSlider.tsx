@@ -67,7 +67,7 @@ const slides: Slide[] = [
   },
 ];
 
-const AUTO_MS = 6000;
+const AUTO_MS = 3000;
 
 export const HeroSlider = () => {
   const [index, setIndex] = useState(0);
