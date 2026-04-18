@@ -96,7 +96,7 @@ export const Nav = () => {
               href={waLink()}
               target="_blank"
               rel="noopener"
-              className="hidden sm:inline-flex btn-gold !py-2 !px-5 text-sm"
+              className="inline-flex btn-gold !py-2 !px-4 text-sm"
             >
               WhatsApp
             </a>
