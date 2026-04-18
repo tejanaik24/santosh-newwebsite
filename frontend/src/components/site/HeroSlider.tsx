@@ -87,6 +87,9 @@ export const HeroSlider = () => {
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
   const captionRefs = useRef<(HTMLDivElement | null)[]>([]);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const xTo = useRef<ReturnType<typeof gsap.quickTo> | null>(null);
+  const yTo = useRef<ReturnType<typeof gsap.quickTo> | null>(null);
   const total = slides.length;
 
   // Set initial GSAP states + start first slide
@@ -114,6 +117,31 @@ export const HeroSlider = () => {
       if (v) v.muted = muted;
     });
   }, [muted]);
+
+  // 3D parallax — init quickTo targets once
+  useEffect(() => {
+    const activeCaption = captionRefs.current[0];
+    if (!activeCaption) return;
+    xTo.current = gsap.quickTo(activeCaption, "rotateY", { duration: 0.6, ease: "power2.out" });
+    yTo.current = gsap.quickTo(activeCaption, "rotateX", { duration: 0.6, ease: "power2.out" });
+  }, []);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = stageRef.current;
+    if (!el) return;
+    const { left, top, width, height } = el.getBoundingClientRect();
+    const nx = ((e.clientX - left) / width - 0.5) * 2;
+    const ny = ((e.clientY - top) / height - 0.5) * 2;
+    const cap = captionRefs.current[index];
+    if (cap) {
+      gsap.to(cap, { rotateY: nx * 6, rotateX: -ny * 4, transformPerspective: 900, duration: 0.5, ease: "power2.out" });
+    }
+  };
+
+  const handleMouseLeave = () => {
+    const cap = captionRefs.current[index];
+    if (cap) gsap.to(cap, { rotateY: 0, rotateX: 0, duration: 0.8, ease: "elastic.out(1,0.5)" });
+  };
 
   // Auto-rotate
   useEffect(() => {
@@ -186,7 +214,12 @@ export const HeroSlider = () => {
           </button>
 
           {/* Main stage */}
-          <div className="col-span-12 md:col-span-10 relative h-[60vh] min-h-[420px] max-h-[640px] rounded-2xl overflow-hidden gold-border glow-gold bg-navy-dark">
+          <div
+            ref={stageRef}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            className="col-span-12 md:col-span-10 relative h-[60vh] min-h-[420px] max-h-[640px] rounded-2xl overflow-hidden gold-border glow-gold bg-navy-dark"
+          >
             {slides.map((s, i) => (
               <div
                 key={i}
