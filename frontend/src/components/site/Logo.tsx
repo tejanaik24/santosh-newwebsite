@@ -1,12 +1,12 @@
-import logoCropped from "@/assets/logo-cropped.png";
+import logoSvg from "@/assets/srivatsala-logo.svg";
 
 type Props = { className?: string };
 
 export const Logo = ({ className }: Props) => (
   <img
-    src={logoCropped}
+    src={logoSvg}
     alt="Srivatsala Silver House"
     className={className}
-    style={{ objectFit: "contain", mixBlendMode: "screen" }}
+    style={{ objectFit: "contain" }}
   />
 );

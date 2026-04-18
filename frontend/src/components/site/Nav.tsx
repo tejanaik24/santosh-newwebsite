@@ -17,7 +17,6 @@ export const Nav = () => {
   const ref = useRef<HTMLElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
-  const [solid, setSolid] = useState(false);
   const lastY = useRef(0);
 
   // Hide nav on scroll down, show on scroll up
@@ -25,7 +24,6 @@ export const Nav = () => {
     const yTo = gsap.quickTo(ref.current, "y", { duration: 0.4, ease: "power3.out" });
     const onScroll = () => {
       const y = window.scrollY;
-      setSolid(y > 40);
       const goingDown = y > lastY.current && y > 200;
       yTo(goingDown ? -120 : 0);
       lastY.current = y;
@@ -59,15 +57,12 @@ export const Nav = () => {
     <>
       <header
         ref={ref}
-        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-500 ${
-          solid
-            ? "bg-[hsl(var(--bg-dark))]/92 backdrop-blur-md border-b border-[hsl(var(--gold)/0.15)]"
-            : "bg-transparent"
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 bg-[hsl(var(--bg-dark))] border-b border-[hsl(var(--gold)/0.3)]"
+        style={{ boxShadow: "0 2px 24px hsl(213 100% 4% / 0.6)" }}
       >
-        <div className="container flex items-center justify-between h-20">
+        <div className="container flex items-center justify-between h-24">
           <a href="#home" className="flex items-center" aria-label="Srivatsala Silver House home">
-            <Logo className="h-12 w-auto" />
+            <Logo className="h-16 w-auto" />
           </a>
 
           {/* Desktop nav */}
@@ -153,8 +148,8 @@ export const Nav = () => {
         }`}
       >
         {/* Top bar inside overlay */}
-        <div className="container flex items-center justify-between h-20">
-          <Logo className="h-12 w-auto" />
+        <div className="container flex items-center justify-between h-24">
+          <Logo className="h-16 w-auto" />
 
           {/* X button inside overlay (closes menu) */}
           <button
