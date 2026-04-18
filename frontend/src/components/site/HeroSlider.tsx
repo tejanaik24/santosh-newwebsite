@@ -194,17 +194,27 @@ export const HeroSlider = () => {
   return (
     <section
       id="home"
-      className="relative pt-24 pb-10 sm:pt-28"
+      className="relative h-screen min-h-[640px] flex flex-col pt-20"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <div className="container">
-        <div className="relative grid grid-cols-12 gap-2 sm:gap-3">
+      {/* Full-bleed outer gold glow ring — the "highlight" */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-4 top-20 bottom-0 rounded-3xl -z-0"
+        style={{
+          boxShadow: "0 0 80px -10px hsl(44 73% 50% / 0.45), 0 0 200px -40px hsl(44 73% 50% / 0.2)",
+        }}
+      />
+
+      <div className="container flex-1 flex flex-col pb-4">
+        <div className="relative grid grid-cols-12 gap-2 sm:gap-3 flex-1 min-h-0">
+
           {/* Prev peek */}
           <button
             aria-label="Previous slide"
             onClick={prev}
-            className="hidden md:block col-span-1 relative h-[60vh] min-h-[420px] max-h-[640px] rounded-l-2xl overflow-hidden group"
+            className="hidden md:flex col-span-1 relative rounded-l-2xl overflow-hidden group"
           >
             <PeekMedia
               slide={slides[prevIdx]}
@@ -213,12 +223,16 @@ export const HeroSlider = () => {
             <div className="absolute inset-0 bg-[hsl(var(--bg-dark)/0.4)] group-hover:bg-[hsl(var(--bg-dark)/0.2)] transition" />
           </button>
 
-          {/* Main stage */}
+          {/* Main stage — fills remaining height */}
           <div
             ref={stageRef}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className="col-span-12 md:col-span-10 relative h-[60vh] min-h-[420px] max-h-[640px] rounded-2xl overflow-hidden gold-border glow-gold bg-navy-dark"
+            className="col-span-12 md:col-span-10 relative rounded-2xl overflow-hidden bg-navy-dark"
+            style={{
+              border: "1px solid hsl(44 73% 50% / 0.5)",
+              boxShadow: "0 0 0 1px hsl(44 73% 50% / 0.15), inset 0 0 60px -20px hsl(44 73% 50% / 0.08)",
+            }}
           >
             {slides.map((s, i) => (
               <div
@@ -249,18 +263,18 @@ export const HeroSlider = () => {
                   />
                 )}
 
-                {/* Gradient overlay for caption legibility */}
+                {/* Gradient overlay */}
                 <div
                   aria-hidden
                   className="absolute inset-0"
                   style={{
                     background:
-                      "linear-gradient(90deg, transparent 35%, hsl(213 100% 8% / 0.55) 70%, hsl(213 100% 6% / 0.85) 100%)",
+                      "linear-gradient(90deg, rgba(5,10,30,0.25) 0%, transparent 35%, hsl(213 100% 8% / 0.55) 70%, hsl(213 100% 6% / 0.88) 100%), linear-gradient(180deg, transparent 50%, rgba(5,10,30,0.7) 100%)",
                   }}
                 />
 
                 {/* Brand watermark */}
-                <span className="absolute top-5 left-5 text-[10px] tracking-[0.4em] text-silver/85 uppercase border border-silver/30 px-2 py-1 rounded">
+                <span className="absolute top-5 left-5 text-[10px] tracking-[0.4em] text-silver/85 uppercase border border-silver/30 px-2 py-1 rounded backdrop-blur-sm">
                   A Srivatsala Signature
                 </span>
 
@@ -272,7 +286,7 @@ export const HeroSlider = () => {
                   <p className="text-[10px] sm:text-xs tracking-[0.4em] text-rose-gold uppercase mb-3">
                     {s.eyebrow}
                   </p>
-                  <h2 className="font-display text-6xl sm:text-7xl text-silver leading-none">
+                  <h2 className="font-display text-6xl sm:text-7xl lg:text-8xl text-silver leading-none">
                     {s.title}
                   </h2>
                   <p className="font-display italic text-2xl sm:text-3xl text-silver/90 mt-3">
@@ -280,7 +294,7 @@ export const HeroSlider = () => {
                     <br />
                     {s.subtitle}
                   </p>
-                  <div className="mt-6 inline-block text-left bg-[hsl(var(--bg-dark)/0.55)] backdrop-blur-sm border border-[hsl(var(--gold)/0.35)] rounded-lg px-5 py-4">
+                  <div className="mt-6 inline-block text-left bg-[hsl(var(--bg-dark)/0.6)] backdrop-blur-sm border border-[hsl(var(--gold)/0.4)] rounded-lg px-5 py-4">
                     <p className="font-display text-3xl text-gold-light leading-tight">
                       {s.offerLine1}
                     </p>
@@ -301,15 +315,28 @@ export const HeroSlider = () => {
                     </a>
                   </div>
                 </div>
+
+                {/* Eyebrow strip — bottom-left overlay */}
+                {i === index && (
+                  <div className="absolute bottom-16 left-5 sm:left-8">
+                    <p className="text-[10px] tracking-[0.4em] uppercase text-rose-gold mb-1">
+                      Madhurawada · Visakhapatnam
+                    </p>
+                    <h1 className="font-display text-xl sm:text-2xl text-silver leading-tight">
+                      For an{" "}
+                      <span className="text-gradient-gold">Auspicious Beginning</span>
+                    </h1>
+                  </div>
+                )}
               </div>
             ))}
 
-            {/* Mute/unmute — only visible when active slide is video */}
+            {/* Mute/unmute */}
             {activeIsVideo && (
               <button
                 aria-label={muted ? "Unmute video" : "Mute video"}
                 onClick={() => setMuted((m) => !m)}
-                className="absolute bottom-12 left-4 z-10 w-9 h-9 grid place-items-center rounded-full bg-[hsl(var(--bg-dark)/0.65)] backdrop-blur border border-silver/20 text-silver hover:text-gold-light hover:border-[hsl(var(--gold-light))] transition"
+                className="absolute bottom-12 right-4 z-10 w-9 h-9 grid place-items-center rounded-full bg-[hsl(var(--bg-dark)/0.65)] backdrop-blur border border-silver/20 text-silver hover:text-gold-light hover:border-[hsl(var(--gold-light))] transition"
               >
                 {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
               </button>
@@ -332,7 +359,7 @@ export const HeroSlider = () => {
             </button>
 
             {/* Dots */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2.5">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2.5 z-10">
               {slides.map((_, i) => (
                 <button
                   key={i}
@@ -352,7 +379,7 @@ export const HeroSlider = () => {
           <button
             aria-label="Next slide"
             onClick={next}
-            className="hidden md:block col-span-1 relative h-[60vh] min-h-[420px] max-h-[640px] rounded-r-2xl overflow-hidden group"
+            className="hidden md:flex col-span-1 relative rounded-r-2xl overflow-hidden group"
           >
             <PeekMedia
               slide={slides[nextIdx]}
@@ -360,17 +387,6 @@ export const HeroSlider = () => {
             />
             <div className="absolute inset-0 bg-[hsl(var(--bg-dark)/0.4)] group-hover:bg-[hsl(var(--bg-dark)/0.2)] transition" />
           </button>
-        </div>
-
-        {/* Eyebrow strip below slider */}
-        <div className="mt-8 text-center">
-          <p className="text-xs tracking-[0.4em] uppercase text-rose-gold">Madhurawada · Visakhapatnam</p>
-          <h1 className="font-display text-3xl sm:text-5xl mt-3 text-silver">
-            For an <span className="text-gradient-gold">Auspicious Beginning</span>
-          </h1>
-          <p className="text-silver/70 mt-3 max-w-xl mx-auto text-sm sm:text-base">
-            Discover our most-loved gold &amp; silver designs — handcrafted in the timeless Andhra tradition.
-          </p>
         </div>
       </div>
     </section>
