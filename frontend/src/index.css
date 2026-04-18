@@ -70,7 +70,6 @@
 
   body {
     background: var(--gradient-bg);
-    background-attachment: fixed;
   }
 
   h1, h2, h3, h4, .font-display {
@@ -138,6 +137,10 @@
 @keyframes tmarq {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
