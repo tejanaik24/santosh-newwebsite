@@ -3,9 +3,10 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import productBangles from "@/assets/product-bangles.jpg";
 import productSilver from "@/assets/product-silver.jpg";
+import productJhumka from "@/assets/product-jhumka.jpg";
 import mangomala from "@/assets/mangomala.webp";
 import gundalaharam from "@/assets/gundalaharam.jpg";
-import nethichutti from "@/assets/nethichutti.webp";
+import bridalHero from "@/assets/bridal-hero.jpg";
 import mangalasutram from "@/assets/mangalasutram.jpg";
 import ankelets from "@/assets/ankelets.webp";
 import vadanam from "@/assets/vadanam.webp";
@@ -13,16 +14,13 @@ import kasulaperu from "@/assets/kasulaperu-new.webp";
 import matteelu from "@/assets/matteelu.jpeg";
 import vanki from "@/assets/vanki.jpg";
 
-const U = (id: string) =>
-  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=700&q=80`;
-
 const cats: { name: string; img: string }[] = [
   { name: "Rings",        img: matteelu },
   { name: "Necklaces",    img: mangomala },
   { name: "Bangles",      img: productBangles },
-  { name: "Earrings",     img: U("1535632787350-4e68ef0ac584") },
+  { name: "Earrings",     img: productJhumka },
   { name: "Chains",       img: gundalaharam },
-  { name: "Bridal Sets",  img: nethichutti },
+  { name: "Bridal Sets",  img: bridalHero },
   { name: "Silver",       img: productSilver },
   { name: "Vanki",        img: vanki },
   { name: "Mangalsutra",  img: mangalasutram },

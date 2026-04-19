@@ -7,7 +7,9 @@ import jhumka from "@/assets/product-jhumka.jpg";
 import kasulaperu from "@/assets/product-kasulaperu.jpg";
 import bangles from "@/assets/product-bangles.jpg";
 import silver from "@/assets/product-silver.jpg";
-import hero from "@/assets/hero-jewellery.jpg";
+import gundlaharam from "@/assets/gundalaharam.jpg";
+import mangomala from "@/assets/mangomala.webp";
+import bridalHero from "@/assets/bridal-hero.jpg";
 import { waLink } from "@/lib/site";
 
 type Tag = "Gold" | "Silver" | "Bridal" | "Andhra Traditional" | "Daily Wear";
@@ -18,14 +20,14 @@ const products: { name: string; img: string; weight: string; price: string; badg
   { name: "Bridal Vaddanam", img: vaddanam, weight: "165g", price: "₹11.5L – ₹12.8L", badge: "Trending", tags: ["Gold", "Bridal", "Andhra Traditional"] },
   { name: "Temple Jhumkas", img: jhumka, weight: "18g", price: "₹1.26L – ₹1.4L", badge: "New Arrival", tags: ["Gold", "Andhra Traditional"] },
   { name: "Royal Gold Bangles", img: bangles, weight: "78g", price: "₹5.46L – ₹6.1L", tags: ["Gold", "Daily Wear"] },
-  { name: "Signature Choker", img: hero, weight: "55g", price: "₹3.85L – ₹4.3L", badge: "Limited", tags: ["Gold", "Bridal"] },
+  { name: "Signature Bridal Set", img: bridalHero, weight: "55g", price: "₹3.85L – ₹4.3L", badge: "Limited", tags: ["Gold", "Bridal"] },
   { name: "Silver Bangle Pair", img: silver, weight: "62g", price: "₹5,400 – ₹6,200", badge: "Best Seller", tags: ["Silver", "Daily Wear"] },
-  { name: "Gundla Haram", img: kasulaperu, weight: "92g", price: "₹6.44L – ₹7.2L", tags: ["Gold", "Andhra Traditional", "Bridal"] },
-  { name: "Mango Mala", img: hero, weight: "48g", price: "₹3.36L – ₹3.75L", badge: "New Arrival", tags: ["Gold", "Andhra Traditional"] },
+  { name: "Gundla Haram", img: gundlaharam, weight: "92g", price: "₹6.44L – ₹7.2L", tags: ["Gold", "Andhra Traditional", "Bridal"] },
+  { name: "Mango Mala", img: mangomala, weight: "48g", price: "₹3.36L – ₹3.75L", badge: "New Arrival", tags: ["Gold", "Andhra Traditional"] },
   { name: "Pearl Drop Jhumkas", img: jhumka, weight: "14g", price: "₹98,000 – ₹1.1L", tags: ["Gold", "Daily Wear"] },
   { name: "Antique Vaddanam", img: vaddanam, weight: "180g", price: "₹12.6L – ₹14L", badge: "Limited", tags: ["Gold", "Bridal", "Andhra Traditional"] },
   { name: "Silver Anklets", img: silver, weight: "85g", price: "₹7,400 – ₹8,500", tags: ["Silver", "Daily Wear"] },
-  { name: "Heritage Necklace", img: hero, weight: "60g", price: "₹4.2L – ₹4.8L", badge: "Trending", tags: ["Gold", "Andhra Traditional"] },
+  { name: "Heritage Haram", img: gundlaharam, weight: "60g", price: "₹4.2L – ₹4.8L", badge: "Trending", tags: ["Gold", "Andhra Traditional"] },
 ];
 
 const filters: ("All" | Tag)[] = ["All", "Gold", "Silver", "Bridal", "Andhra Traditional", "Daily Wear"];
