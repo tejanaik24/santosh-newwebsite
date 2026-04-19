@@ -4,8 +4,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import productBangles from "@/assets/product-bangles.jpg";
 import productSilver from "@/assets/product-silver.jpg";
 import productJhumka from "@/assets/product-jhumka.jpg";
+import heroJewellery from "@/assets/hero-jewellery.jpg";
 import mangomala from "@/assets/mangomala.webp";
-import gundalaharam from "@/assets/gundalaharam.jpg";
 import bridalHero from "@/assets/bridal-hero.jpg";
 import mangalasutram from "@/assets/mangalasutram.jpg";
 import ankelets from "@/assets/ankelets.webp";
@@ -15,11 +15,11 @@ import matteelu from "@/assets/matteelu.jpeg";
 import vanki from "@/assets/vanki.jpg";
 
 const cats: { name: string; img: string }[] = [
-  { name: "Rings",        img: matteelu },
+  { name: "Mattelu",      img: matteelu },
   { name: "Necklaces",    img: mangomala },
   { name: "Bangles",      img: productBangles },
   { name: "Earrings",     img: productJhumka },
-  { name: "Chains",       img: gundalaharam },
+  { name: "Chains",       img: heroJewellery },
   { name: "Bridal Sets",  img: bridalHero },
   { name: "Silver",       img: productSilver },
   { name: "Vanki",        img: vanki },
