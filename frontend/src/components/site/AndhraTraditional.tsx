@@ -4,20 +4,22 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import productVaddanam from "@/assets/product-vaddanam.jpg";
 import productKasulaperu from "@/assets/product-kasulaperu.jpg";
 import productJhumka from "@/assets/product-jhumka.jpg";
-
-const U = (id: string) =>
-  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=900&q=80`;
+import gundlaharam from "@/assets/gundalaharam.jpg";
+import mangomala from "@/assets/mangomala.webp";
+import nethichutti from "@/assets/nethichutti.webp";
+import vanki from "@/assets/vanki.jpg";
+import matteelu from "@/assets/matteelu.jpeg";
 
 const designs: { name: string; desc: string; img: string }[] = [
-  { name: "Vaddanam", desc: "Ornate bridal waist belt", img: productVaddanam },
-  { name: "Kasulaperu", desc: "Lakshmi coin necklace", img: productKasulaperu },
-  { name: "Gundla Haram", desc: "Long beaded necklace", img: U("1758995115518-26f90aa61b97") },
-  { name: "Jhumkas", desc: "Bell-shaped earrings", img: productJhumka },
-  { name: "Mango Mala", desc: "Mango motif necklace", img: U("1760786933663-327c858d5434") },
-  { name: "Nethichutti", desc: "Forehead ornament", img: U("1760080839074-07e553b0565e") },
-  { name: "Vanki", desc: "Armlet with gem inlay", img: U("1723084071339-16dcb38f4524") },
-  { name: "Buttalu", desc: "Stud earrings", img: U("1626784215013-13322cb0e471") },
-  { name: "Mattelu", desc: "Silver toe rings", img: U("1773574953605-f64fa2750efc") },
+  { name: "Vaddanam",    desc: "Ornate bridal waist belt",  img: productVaddanam },
+  { name: "Kasulaperu",  desc: "Lakshmi coin necklace",     img: productKasulaperu },
+  { name: "Gundla Haram",desc: "Long beaded necklace",      img: gundlaharam },
+  { name: "Jhumkas",     desc: "Bell-shaped earrings",      img: productJhumka },
+  { name: "Mango Mala",  desc: "Mango motif necklace",      img: mangomala },
+  { name: "Nethichutti", desc: "Forehead ornament",         img: nethichutti },
+  { name: "Vanki",       desc: "Armlet with gem inlay",     img: vanki },
+  { name: "Buttalu",     desc: "Stud earrings",             img: productJhumka },
+  { name: "Mattelu",     desc: "Silver toe rings",          img: matteelu },
 ];
 
 export const AndhraTraditional = () => {
