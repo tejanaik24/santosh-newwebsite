@@ -1,6 +1,7 @@
 {
-  "rewrites": [
-    { "source": "/google.+", "destination": "/$1" },
-    { "source": "/(.*)", "destination": "/index.html" }
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/google.+", "status": 404 },
+    { "src": "/(.*)", "destination": "/index.html" }
   ]
 }
