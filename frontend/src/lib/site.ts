@@ -11,9 +11,9 @@ export const SITE = {
   hours: "Mon–Sun · 10:30 AM – 9:00 PM",
   // Social links — update with actual profile URLs
   social: {
-    instagram: "", // e.g. "https://instagram.com/srivatsalasilverhouse"
-    facebook: "",  // e.g. "https://facebook.com/srivatsalasilverhouse"
-    youtube: "",   // e.g. "https://youtube.com/@srivatsalasilverhouse"
+    instagram: "https://www.instagram.com/srivatsalasilverhouse", // e.g. "https://instagram.com/srivatsalasilverhouse"
+    facebook: "https://www.facebook.com/srivatsalasilverhouse",  // e.g. "https://facebook.com/srivatsalasilverhouse"
+    youtube: "https://www.youtube.com/@srivatsalasilverhouse",   // e.g. "https://youtube.com/@srivatsalasilverhouse"
   },
 };
 

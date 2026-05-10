@@ -1,7 +1,6 @@
 {
   "routes": [
     { "handle": "filesystem" },
-    { "src": "/google.+", "status": 404 },
     { "src": "/(.*)", "destination": "/index.html" }
   ]
 }
