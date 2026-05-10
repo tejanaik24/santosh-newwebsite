@@ -1,0 +1,112 @@
+import { useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import { getBlogBySlug } from "@/data/blogs";
+import { SITE, waLink } from "@/lib/site";
+import { Nav } from "@/components/site/Nav";
+import { Footer } from "@/components/site/Footer";
+import { WhatsAppFab } from "@/components/site/WhatsAppFab";
+
+const BlogPost = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const post = slug ? getBlogBySlug(slug) : undefined;
+
+  useEffect(() => {
+    if (post) {
+      document.title = `${post.title} — ${SITE.name}`;
+      const meta = document.querySelector('meta[name="description"]');
+      if (meta) meta.setAttribute("content", post.meta);
+      window.scrollTo(0, 0);
+    }
+  }, [post]);
+
+  if (!post) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center max-w-lg px-6">
+          <h1 className="font-display text-4xl text-silver mb-4">Blog Not Found</h1>
+          <p className="text-silver/70 mb-8">This blog post does not exist or may have been moved.</p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Link to="/blog" className="btn-gold">View All Blogs</Link>
+            <Link to="/" className="btn-ghost-gold">Back to Home</Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Nav />
+      <article className="container py-32 max-w-3xl mx-auto">
+        <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-gold-light hover:text-gold-light/80 transition mb-8">
+          ← Back to Blog
+        </Link>
+
+        <header className="mb-12">
+          <div className="flex items-center gap-3 text-xs text-silver/50 mb-4">
+            <time dateTime={post.date}>{post.date}</time>
+            <span>·</span>
+            <span>{post.readTime}</span>
+            <span>·</span>
+            <span className="text-rose-gold">{post.keyword}</span>
+          </div>
+          <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl text-silver leading-tight">
+            {post.title}
+          </h1>
+        </header>
+
+        <div className="prose prose-invert max-w-none">
+          {post.sections.map((section, i) => {
+            const Component = section.level === "h2" ? "h2" : "h3";
+            return (
+              <div key={i} className="mb-6">
+                <Component className={`font-display text-silver mt-8 mb-4 ${section.level === "h2" ? "text-2xl sm:text-3xl" : "text-xl sm:text-2xl text-gold-light"}`}>
+                  {section.heading}
+                </Component>
+                {section.content.split("\n\n").map((para, j) => (
+                  <p key={j} className="text-silver/80 leading-relaxed mb-4">
+                    {para}
+                  </p>
+                ))}
+              </div>
+            );
+          })}
+
+          {post.faq.length > 0 && (
+            <div className="mt-16 pt-12 border-t border-[hsl(var(--gold)/0.2)]">
+              <h2 className="font-display text-2xl sm:text-3xl text-silver mb-8">
+                Frequently Asked Questions
+              </h2>
+              <div className="space-y-6">
+                {post.faq.map((item, i) => (
+                  <div key={i} className="luxury-card rounded-xl p-6 gold-border">
+                    <h3 className="font-display text-lg text-gold-light mb-3">{item.question}</h3>
+                    <p className="text-silver/75 text-sm leading-relaxed">{item.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="mt-16 pt-10 border-t border-[hsl(var(--gold)/0.2)] text-center">
+          <p className="text-silver/60 text-sm mb-6">
+            Have questions? Talk to our team directly.
+          </p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <a href={waLink(`Hi, I read your blog about "${post.title}" and have a question.`)} target="_blank" rel="noopener" className="btn-gold">
+              Ask on WhatsApp
+            </a>
+            <Link to="/" className="btn-ghost-gold">
+              Visit Srivatsala Silver House
+            </Link>
+          </div>
+        </div>
+      </article>
+      <Footer />
+      <WhatsAppFab />
+    </div>
+  );
+};
+
+export default BlogPost;

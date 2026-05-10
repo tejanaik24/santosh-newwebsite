@@ -1,16 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import { Link } from "react-router-dom";
 import { Heart, Search } from "lucide-react";
 import { Logo } from "./Logo";
 import { SITE, waLink } from "@/lib/site";
 
-const links = [
-  { label: "Home", href: "#home" },
-  { label: "Collections", href: "#collections" },
-  { label: "Andhra Traditional", href: "#andhra" },
-  { label: "Bridal", href: "#bridal" },
-  { label: "About", href: "#why" },
-  { label: "Contact", href: "#location" },
+const links: ({ label: string; href: string; external: boolean })[] = [
+  { label: "Home", href: "#home", external: false },
+  { label: "Blog", href: "/blog", external: true },
+  { label: "Collections", href: "#collections", external: false },
+  { label: "Andhra Traditional", href: "#andhra", external: false },
+  { label: "Bridal", href: "#bridal", external: false },
+  { label: "About", href: "#why", external: false },
+  { label: "Contact", href: "#location", external: false },
 ];
 
 export const Nav = () => {
@@ -61,22 +63,33 @@ export const Nav = () => {
         style={{ boxShadow: "0 2px 24px hsl(213 100% 4% / 0.6)" }}
       >
         <div className="container flex items-center justify-between h-24">
-          <a href="#home" className="flex items-center" aria-label="Srivatsala Silver House home">
+          <Link to="/" className="flex items-center" aria-label="Srivatsala Silver House home">
             <Logo className="h-16 w-auto" />
-          </a>
+          </Link>
 
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-8">
-            {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className="group relative text-sm tracking-wide text-silver/85 hover:text-gold-light transition-colors"
-              >
-                {l.label}
-                <span className="absolute -bottom-1 left-0 h-px w-0 bg-[hsl(var(--gold-light))] transition-all duration-300 group-hover:w-full" />
-              </a>
-            ))}
+            {links.map((l) =>
+              l.external ? (
+                <Link
+                  key={l.href}
+                  to={l.href}
+                  className="group relative text-sm tracking-wide text-silver/85 hover:text-gold-light transition-colors"
+                >
+                  {l.label}
+                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-[hsl(var(--gold-light))] transition-all duration-300 group-hover:w-full" />
+                </Link>
+              ) : (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  className="group relative text-sm tracking-wide text-silver/85 hover:text-gold-light transition-colors"
+                >
+                  {l.label}
+                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-[hsl(var(--gold-light))] transition-all duration-300 group-hover:w-full" />
+                </a>
+              )
+            )}
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-3">
@@ -149,7 +162,9 @@ export const Nav = () => {
       >
         {/* Top bar inside overlay */}
         <div className="container flex items-center justify-between h-24">
-          <Logo className="h-16 w-auto" />
+          <Link to="/" onClick={close}>
+            <Logo className="h-16 w-auto" />
+          </Link>
 
           {/* X button inside overlay (closes menu) */}
           <button
@@ -173,17 +188,29 @@ export const Nav = () => {
 
         {/* Nav links */}
         <nav className="container mt-8 flex flex-col gap-5">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              data-menu-item
-              onClick={close}
-              className="font-display text-3xl text-silver hover:text-gold-light transition-colors py-1"
-            >
-              {l.label}
-            </a>
-          ))}
+          {links.map((l) =>
+            l.external ? (
+              <Link
+                key={l.href}
+                to={l.href}
+                data-menu-item
+                onClick={close}
+                className="font-display text-3xl text-silver hover:text-gold-light transition-colors py-1"
+              >
+                {l.label}
+              </Link>
+            ) : (
+              <a
+                key={l.href}
+                href={l.href}
+                data-menu-item
+                onClick={close}
+                className="font-display text-3xl text-silver hover:text-gold-light transition-colors py-1"
+              >
+                {l.label}
+              </a>
+            )
+          )}
           <a
             href={waLink()}
             target="_blank"
