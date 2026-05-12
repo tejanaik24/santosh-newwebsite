@@ -167,6 +167,136 @@ export const blogs: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "gold-silver-jewellery-kommadi-pm-palem-madhurawada",
+    title: "Gold & Silver Jewellery in Kommadi, PM Palem & Madhurawada — BIS Hallmarked at Srivatsala Silver House",
+    meta: "Looking for gold jewellery in Kommadi or PM Palem? Srivatsala Silver House in Madhurawada offers BIS hallmarked gold, silver, and traditional Andhra designs just minutes from your home.",
+    keyword: "gold jewellery Kommadi PM Palem",
+    date: "2026-05-24",
+    readTime: "6 min read",
+    image: "/og-image.jpg",
+    imageAlt: "Srivatsala Silver House — gold and silver jewellery showroom in Madhurawada, serving Kommadi and PM Palem",
+    sections: [
+      {
+        heading: "Tired of Driving to Dwaraka Nagar for Jewellery?",
+        level: "h2",
+        content:
+          "If you live in Kommadi or PM Palem, every jewellery trip goes the same way. You get in the car at 11 AM. You hit traffic at Madhurawada junction. You sit through the signal near Yendada. By the time you reach Dwaraka Nagar, you have already spent 40 minutes on the road. Then you park, browse for 20 minutes, and drive 40 minutes back."
+          + "\n\n"
+          + "That is nearly two hours for a 20-minute shopping trip."
+          + "\n\n"
+          + "There is a better option. Srivatsala Silver House on Revallapalem Road in Madhurawada is 5 minutes from Kommadi and 2 minutes from PM Palem. We have been here for over fifteen years, and families from both areas have been our regulars for most of that time."
+      },
+      {
+        heading: "Why Kommadi Families Prefer Shopping Local",
+        level: "h2",
+        content:
+          "Kommadi has grown fast. New apartments, IT professionals moving in from outside Vizag, young families settling down. If you work at Rushikonda IT park, the last thing you want after a long day is a 40-minute drive to buy jewellery."
+      },
+      {
+        heading: "The Convenience Factor",
+        level: "h3",
+        content:
+          "Kommadi to Srivatsala takes under 10 minutes. You can stop by on your way home, pick up what you need, and still be home before 7 PM. No weekend special trip required."
+      },
+      {
+        heading: "Lightweight Gold for Young Couples",
+        level: "h3",
+        content:
+          "Gold prices have been high. Most young couples in Kommadi are not looking for heavy 50-gram necklaces. They want lightweight gold earrings (2-5 grams), thin gold chains (4-8 grams), simple gold rings (2-4 grams), and small silver pieces like anklets and pendants. We stock these specifically. Our lightweight collection is designed for budgets from ₹5,000 to ₹25,000."
+      },
+      {
+        heading: "Gold as Investment — The Vizag Mindset",
+        level: "h3",
+        content:
+          "Vizag families buy gold differently. It is not just jewellery — it is savings. When a couple in PM Palem buys a gold necklace for ₹40,000, they are thinking about their daughter's wedding or a future need. That is why BIS hallmark matters so much in this market. Every gram of gold you buy from us is verifiably pure."
+      },
+      {
+        heading: "PM Palem: Where Family Traditions Matter",
+        level: "h2",
+        content:
+          "PM Palem is different from Kommadi. It is an older, more established residential area. Families have been here for generations. The schools are good — St. Anns, Delhi Public School. The Cricket Stadium is nearby. And family functions happen year-round."
+      },
+      {
+        heading: "What PM Palem Families Typically Need",
+        level: "h3",
+        content:
+          "Bridal jewellery tops the list. PM Palem has a steady stream of weddings through the year. Traditional bridal sets, vaddanam, kasulaperu, gundla haram — these are our speciality. Silver for everyday is also in high demand. PM Palem women wear silver daily — anklets, toe rings, bangles. Gift jewellery for birthdays, anniversaries, and housewarmings is another frequent request."
+      },
+      {
+        heading: "Gold Savings the Local Way",
+        level: "h3",
+        content:
+          "Some of our best customers from PM Palem use informal gold savings. They come in monthly, pay what they can, and collect their jewellery during wedding season or Diwali. No paperwork. No pressure. Just a trusted local relationship."
+      },
+      {
+        heading: "Srivatsala vs. Dwaraka Nagar Jewellers",
+        level: "h2",
+        content:
+          "Here is how we compare against the big stores on VIP Road and Dwaraka Nagar:"
+      },
+      {
+        heading: "Travel Time",
+        level: "h3",
+        content:
+          "From Kommadi: 5 minutes to Srivatsala vs 30-40 minutes to Dwaraka Nagar. From PM Palem: 2 minutes vs 25-35 minutes."
+      },
+      {
+        heading: "Making Charges",
+        level: "h3",
+        content:
+          "Our making charges are transparent and lower than big chain stores because we do not have showroom overheads, large payrolls, or advertising budgets. You pay for the gold and the craftsmanship — not the brand markup."
+      },
+      {
+        heading: "Personal Service",
+        level: "h3",
+        content:
+          "The owner Santosh is in the shop most days. Want a custom design? Want to negotiate on a bulk order? Just ask. Big chains cannot offer that."
+      },
+      {
+        heading: "The Srivatsala Difference",
+        level: "h2",
+        content:
+          "We have been in Madhurawada for over fifteen years. Most people in the area know us by name. We do not charge for the showroom. We do not have pushy sales — if something does not suit you, we will tell you. We would rather you buy something you genuinely like than something we talked you into."
+      },
+      {
+        heading: "Ready to Visit?",
+        level: "h2",
+        content:
+          "Srivatsala Silver House, Opposite Gayathri Clinic, Revallapalem Road, Madhurawada, Visakhapatnam-530048."
+          + "\n\n"
+          + "Phone: +91 97041 10147. Open every day 10:30 AM to 9:00 PM. No appointment needed. Just walk in."
+          + "\n\n"
+          + "Or send us a WhatsApp message. We will send photos of our current collection, tell you the price, and keep it ready for you."
+      },
+    ],
+    faq: [
+      {
+        question: "How far is Srivatsala Silver House from Kommadi?",
+        answer: "About 2.5 km. A 5-7 minute drive from Kommadi to our showroom on Revallapalem Road in Madhurawada."
+      },
+      {
+        question: "Do you sell lightweight gold for daily wear?",
+        answer: "Yes. We stock lightweight earrings, chains, and rings from 2 grams upward. Ideal for young professionals in Kommadi and daily wear for women in PM Palem."
+      },
+      {
+        question: "Is your silver jewellery hallmarked?",
+        answer: "Silver jewellery in India does not require mandatory BIS hallmarking like gold. However, we source from trusted suppliers and are transparent about purity on every purchase."
+      },
+      {
+        question: "Can I exchange jewellery bought at another shop?",
+        answer: "Yes. We accept old gold jewellery regardless of where you bought it. We assess purity and offer a fair exchange value based on the day's gold rate."
+      },
+      {
+        question: "Do you have a gold savings plan?",
+        answer: "We do not have a formal scheme, but many local families use us informally — paying monthly and collecting jewellery during wedding season or Diwali. Talk to us in person."
+      },
+      {
+        question: "What are your store hours?",
+        answer: "We are open every day from 10:30 AM to 9:00 PM. No weekly off. Weekday afternoons (2 PM to 5 PM) are usually the least crowded."
+      },
+    ],
+  },
 ];
 
 export const getBlogBySlug = (slug: string): BlogPost | undefined =>
