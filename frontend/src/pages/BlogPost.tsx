@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { getBlogBySlug } from "@/data/blogs";
 import { SITE, waLink } from "@/lib/site";
 import { Nav } from "@/components/site/Nav";
@@ -9,14 +10,12 @@ import { WhatsAppFab } from "@/components/site/WhatsAppFab";
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = slug ? getBlogBySlug(slug) : undefined;
+  const url = post ? `https://srivatsalasilverhouse.in/blog/${post.slug}` : "https://srivatsalasilverhouse.in/";
+  const image = post?.image || "/og-image.jpg";
+  const fullImage = image.startsWith("http") ? image : `https://srivatsalasilverhouse.in${image}`;
 
   useEffect(() => {
-    if (post) {
-      document.title = `${post.title} — ${SITE.name}`;
-      const meta = document.querySelector('meta[name="description"]');
-      if (meta) meta.setAttribute("content", post.meta);
-      window.scrollTo(0, 0);
-    }
+    window.scrollTo(0, 0);
   }, [post]);
 
   if (!post) {
@@ -34,8 +33,52 @@ const BlogPost = () => {
     );
   }
 
+  const schemaArticle = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.meta,
+    image: fullImage,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: { "@type": "Person", name: "Srivatsala Silver House" },
+    publisher: { "@type": "Organization", name: SITE.name },
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+  };
+
+  const schemaBreadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://srivatsalasilverhouse.in/" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://srivatsalasilverhouse.in/blog" },
+      { "@type": "ListItem", position: 3, name: post.title, item: url },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>{`${post.title} — ${SITE.name}`}</title>
+        <meta name="description" content={post.meta} />
+        <link rel="canonical" href={url} />
+
+        <meta property="og:title" content={`${post.title} — ${SITE.name}`} />
+        <meta property="og:description" content={post.meta} />
+        <meta property="og:url" content={url} />
+        <meta property="og:type" content="article" />
+        <meta property="og:image" content={fullImage} />
+        <meta property="og:image:alt" content={post.imageAlt} />
+        <meta property="og:site_name" content={SITE.name} />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${post.title} — ${SITE.name}`} />
+        <meta name="twitter:description" content={post.meta} />
+        <meta name="twitter:image" content={fullImage} />
+
+        <script type="application/ld+json">{JSON.stringify(schemaArticle)}</script>
+        <script type="application/ld+json">{JSON.stringify(schemaBreadcrumb)}</script>
+      </Helmet>
       <Nav />
       <article className="container py-32 max-w-3xl mx-auto">
         <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-gold-light hover:text-gold-light/80 transition mb-8">
