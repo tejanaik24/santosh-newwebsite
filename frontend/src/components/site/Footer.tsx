@@ -82,7 +82,7 @@ export const Footer = () => {
         </div>
         <div className="mt-12 pt-6 border-t border-[hsl(var(--gold)/0.15)] flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between text-xs text-silver/55">
           <p>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
-          <p>Crafted with care in Visakhapatnam.</p>
+          <p>Crafted with care in Visakhapatnam. <a href="https://vyzma.in" target="_blank" rel="noopener" className="hover:text-gold-light transition">Powered by Vyzma AI</a>.</p>
         </div>
       </div>
     </footer>
