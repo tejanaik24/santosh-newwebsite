@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { getBlogBySlug } from "@/data/blogs";
+import { getBlogBySlug, blogs } from "@/data/blogs";
 import { SITE, waLink } from "@/lib/site";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
@@ -131,6 +131,31 @@ const BlogPost = () => {
             </div>
           )}
         </div>
+
+        {post.relatedSlugs && post.relatedSlugs.length > 0 && (
+          <div className="mt-16 pt-12 border-t border-[hsl(var(--gold)/0.2)]">
+            <h2 className="font-display text-2xl sm:text-3xl text-silver mb-8">
+              Related Articles
+            </h2>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {post.relatedSlugs.map((slug) => {
+                const related = blogs.find((b) => b.slug === slug);
+                if (!related) return null;
+                return (
+                  <Link
+                    key={slug}
+                    to={`/blog/${slug}`}
+                    className="luxury-card rounded-xl p-5 gold-border hover:border-[hsl(var(--gold-light)/0.5)] transition group"
+                  >
+                    <span className="text-xs text-rose-gold uppercase tracking-wider">{related.keyword}</span>
+                    <h3 className="font-display text-base text-silver group-hover:text-gold-light transition mt-1">{related.title}</h3>
+                    <span className="text-xs text-silver/50 mt-2 block">{related.date} · {related.readTime}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         <div className="mt-16 pt-10 border-t border-[hsl(var(--gold)/0.2)] text-center">
           <p className="text-silver/60 text-sm mb-6">

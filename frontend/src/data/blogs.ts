@@ -9,6 +9,7 @@ export type BlogPost = {
   imageAlt: string;
   sections: BlogSection[];
   faq: BlogFAQ[];
+  relatedSlugs?: string[];
 };
 
 export type BlogSection = {
@@ -62,9 +63,9 @@ export const blogs: BlogPost[] = [
       {
         heading: "Silver Jewellery for Every Budget",
         level: "h3",
-        content:
-          "Gold gets the attention, but our silver collection is equally loved. From daily-wear anklets and toe rings to pooja articles and gift items, we stock 92.5 hallmark silver jewellery that fits every budget. Many families in Madhurawada come to us specifically for silver — and they have been doing so for years."
-      },
+    content:
+      "Gold gets the attention, but our silver collection is equally loved. From daily-wear anklets and toe rings to pooja articles and gift items, we stock 92.5 hallmark silver jewellery that fits every budget. Many families in Madhurawada come to us specifically for silver — and they have been doing so for years."
+  },
       {
         heading: "Covering All Areas Around Madhurawada",
         level: "h2",
@@ -140,6 +141,7 @@ export const blogs: BlogPost[] = [
           + "Prefer to call ahead? WhatsApp us at +91 97041 10147. We can keep your shortlist ready before you arrive."
       },
     ],
+    relatedSlugs: ["silver-jewellery-madhurawada-vizag"],
     faq: [
       {
         question: "Which is the best jewellery shop in Madhurawada?",
@@ -270,6 +272,7 @@ export const blogs: BlogPost[] = [
           + "Or send us a WhatsApp message. We will send photos of our current collection, tell you the price, and keep it ready for you."
       },
     ],
+    relatedSlugs: ["silver-jewellery-madhurawada-vizag"],
     faq: [
       {
         question: "How far is Srivatsala Silver House from Kommadi?",
@@ -424,6 +427,7 @@ export const blogs: BlogPost[] = [
           + "No appointment needed. Just walk in."
       },
     ],
+    relatedSlugs: ["best-jewellery-shop-madhurawada-vizag", "gold-silver-jewellery-kommadi-pm-palem-madhurawada"],
     faq: [
       {
         question: "Where can I buy silver jewellery in Madhurawada?",
