@@ -16,6 +16,8 @@ export type BlogSection = {
   heading: string;
   level: "h2" | "h3";
   content: string;
+  image?: string;
+  imageAlt?: string;
 };
 
 export type BlogFAQ = {
@@ -141,7 +143,7 @@ export const blogs: BlogPost[] = [
           + "Prefer to call ahead? WhatsApp us at +91 97041 10147. We can keep your shortlist ready before you arrive."
       },
     ],
-    relatedSlugs: ["silver-jewellery-madhurawada-vizag"],
+    relatedSlugs: ["silver-jewellery-madhurawada-vizag", "bridal-jewellery-vaddanam-kasulaperu-gundla-haram-visakhapatnam"],
     faq: [
       {
         question: "Which is the best jewellery shop in Madhurawada?",
@@ -427,7 +429,7 @@ export const blogs: BlogPost[] = [
           + "No appointment needed. Just walk in."
       },
     ],
-    relatedSlugs: ["best-jewellery-shop-madhurawada-vizag", "gold-silver-jewellery-kommadi-pm-palem-madhurawada"],
+    relatedSlugs: ["best-jewellery-shop-madhurawada-vizag", "gold-silver-jewellery-kommadi-pm-palem-madhurawada", "silver-pooja-items-madhurawada-vizag"],
     faq: [
       {
         question: "Where can I buy silver jewellery in Madhurawada?",
@@ -458,6 +460,618 @@ export const blogs: BlogPost[] = [
         answer: "They are the same. 92.5% pure silver is also called sterling silver. The remaining 7.5% is usually copper, added for strength. Pure 99.9% silver is too soft for jewellery."
       },
     ],
+  },
+  {
+    slug: "silver-pooja-items-madhurawada-vizag",
+    title: "Essential Pure Silver Pooja Items Every Home in Madhurawada Needs",
+    meta: "Looking for pure silver pooja items in Madhurawada? From silver diyas and kalash to pooja thalis and idols — find everything at Srivatsala Silver House. Visit our showroom or call +91 97041 10147.",
+    keyword: "silver pooja items Madhurawada",
+    date: "2026-06-07",
+    readTime: "9 min read",
+    image: "/og-image.jpg",
+    imageAlt: "Srivatsala Silver House — pure silver pooja items collection in Madhurawada, Visakhapatnam",
+    sections: [
+      {
+        heading: "Why Silver for Pooja? — The Spiritual & Practical Choice",
+        level: "h2",
+        image: "https://images.pexels.com/photos/37116935/pexels-photo-37116935.jpeg",
+        imageAlt: "Traditional Hindu pooja room with silver items and Ganesh idol",
+        content:
+          "In every South Indian home, the pooja room is the heart of the house. The brass lamp that has been polished for generations. The copper kalash passed down from grandmother to granddaughter. And the silver — pure, gleaming silver that holds offerings, lights up prayers, and carries the weight of tradition."
+          + "\n\n"
+          + "Silver is not just a metal in Hindu rituals. It is considered pure (pavitra), sattvic, and suitable for divine offerings. Unlike other metals, silver does not react with food, water, or the herbs used in poojas. It naturally stays cool, resists bacteria, and lasts for generations when cared for properly."
+          + "\n\n"
+          + "India consumes nearly 4,000 tonnes of silver every year, and over half of it goes into jewellery and silverware — including the pooja articles you will find in homes across Andhra Pradesh. Here in Madhurawada, Visakhapatnam, families have trusted Srivatsala Silver House for silver pooja items for over fifteen years. Whether you are setting up a new home temple or adding to your family's collection, we have what you need."
+      },
+      {
+        heading: "Must-Have Silver Pooja Items for Your Home Temple",
+        level: "h2",
+        content:
+          "Every home temple needs a few essential items. Some are daily-use necessities. Others are reserved for special occasions, festivals, and family ceremonies. Here is everything you should consider for your home."
+      },
+      {
+        heading: "Silver Pooja Thali — The Heart of Every Ritual",
+        level: "h3",
+        image: "https://images.pexels.com/photos/7686352/pexels-photo-7686352.jpeg",
+        imageAlt: "Intricately decorated silver pooja thali with traditional pooja items",
+        content:
+          "A silver pooja thali is the base on which everything else sits. Kumkum, turmeric, rice, flowers, coins, incense — all arranged on a single plate for the ceremony. In Andhra homes, the thali is often passed down from mother to daughter as a wedding gift."
+          + "\n\n"
+          + "We stock plain polished silver thalis for daily use and intricately designed ones with embossed patterns for festive occasions. Some have compartments built in. Some come as sets with small bowls. Size ranges from 6-inch daily thalis to 12-inch ceremonial plates."
+          + "\n\n"
+          + "Price range: ₹3,000 to ₹15,000 depending on size and craftsmanship."
+      },
+      {
+        heading: "Silver Diya (Lamp) — Light That Never Fades",
+        level: "h3",
+        image: "https://images.pexels.com/photos/6315702/pexels-photo-6315702.jpeg",
+        imageAlt: "Traditional silver diya lamp lit with ghee flame during pooja",
+        content:
+          "The diya is the first thing you light in every pooja. A silver diya holds the ghee or oil, and the flame represents the removal of darkness and ignorance. In Andhra tradition, a silver lamp is lit during Sandhya Vandanam (evening prayer) and never extinguished until the next morning."
+          + "\n\n"
+          + "We carry silver diyas in multiple styles: simple deepam for daily use, standing diyas with tall stems, hanging diyas for the ceiling, and multiple-wick aarti diyas with space for 5 or 7 wicks. Our silver diyas range from 50 grams to 300 grams."
+          + "\n\n"
+          + "Price range: ₹2,500 to ₹20,000."
+      },
+      {
+        heading: "Silver Kalash — The Sacred Vessel",
+        level: "h3",
+        image: "https://images.pexels.com/photos/7685636/pexels-photo-7685636.jpeg",
+        imageAlt: "Silver pooja plate with kalash and traditional ritual offerings",
+        content:
+          "No Andhra festival is complete without the kalash. A silver pot filled with water, topped with mango leaves and a coconut, it represents abundance and divinity. Varalakshmi Vratam, Satyanarayana Vratam, Griha Pravesh, weddings — the kalash is central to every ceremony."
+          + "\n\n"
+          + "We stock silver kalash in sizes from small daily-use ones (100 grams) to large ceremonial kalash used for temple festivals and housewarmings (up to 500 grams). Some come with a matching lid and base plate."
+          + "\n\n"
+          + "Price range: ₹4,000 to ₹25,000."
+      },
+      {
+        heading: "Silver Bell (Ghanti) — Sound of Purity",
+        level: "h3",
+        content:
+          "The bell is rung during aarti and at the start of pooja. The sound is said to create a vibration that clears negative energy and invites positive frequencies. In Vizag temples and home shrines alike, the silver bell is an essential item."
+          + "\n\n"
+          + "Our collection includes small hand bells for daily pooja and larger temple-style bells with intricately carved handles. The sound quality depends on the silver purity and thickness — we help you choose the right one."
+          + "\n\n"
+          + "Price range: ₹1,500 to ₹8,000."
+      },
+      {
+        heading: "Silver Panchapatra & Spoon — For Abhishekam",
+        level: "h3",
+        content:
+          "The panchapatra is a small silver vessel used to hold water during pooja, and the spoon (udharini) is used to pour it. These are essential for any ritual involving abhishekam (pouring holy water over the deity). In traditional Andhra homes, the panchapatra set sits in every pooja room."
+          + "\n\n"
+          + "Price range: ₹2,000 to ₹6,000 for a complete set."
+      },
+      {
+        heading: "Silver Idols — Ganesh, Lakshmi & More",
+        level: "h3",
+        image: "https://images.pexels.com/photos/13655189/pexels-photo-13655189.jpeg",
+        imageAlt: "Silver Ganesh idol for home temple worship and daily pooja",
+        content:
+          "For families who keep a permanent deity in their home temple, silver idols are the most cherished. Lord Ganesh for wisdom and new beginnings. Goddess Lakshmi for prosperity. Lord Venkateswara for protection. In Vizag, many families commission custom silver idols during wedding seasons or special occasions."
+          + "\n\n"
+          + "We stock silver idols in various sizes — from 2-inch miniatures for travel shrines to 12-inch statues for the main altar. Custom orders welcome. Bring a photo or reference, and our craftsmen will create it."
+          + "\n\n"
+          + "Price range: ₹3,000 to ₹50,000+ depending on size and detail."
+      },
+      {
+        heading: "Silver Kumkum Box & Incense Stand",
+        level: "h3",
+        content:
+          "Two smaller items that complete the pooja set. The kumkum box holds the sacred vermilion powder used in every ritual. The incense (agarbatti) stand holds the sticks during aarti. Both are daily-use items that see constant handling — silver ensures they stay beautiful for years."
+          + "\n\n"
+          + "Price range: ₹800 to ₹3,000."
+      },
+      {
+        heading: "Silver in Andhra Traditions — Beyond the Basics",
+        level: "h2",
+        image: "https://images.pexels.com/photos/37116937/pexels-photo-37116937.jpeg",
+        imageAlt: "Traditional Andhra pooja setup with fruits flowers and silver items during festival",
+        content:
+          "Andhra households have unique silver traditions that you may not find in other parts of India. During Varalakshmi Vratam (celebrated widely in Vizag), women offer silver items to the goddess — kalash, diya, or a complete thali set. During Satyanarayana Vratam, the prasadam is often distributed on a silver plate."
+          + "\n\n"
+          + "In Madhurawada specifically, we see families during Ugadi (Telugu New Year) buying silver items for the home. During Diwali, silver pooja articles are gifted to newly married couples setting up their first home. And during Griha Pravesh (housewarming), a silver kalash and diya are the first items to enter the new home."
+          + "\n\n"
+          + "Every one of these traditions creates a reason to own pure silver pooja items — not as decorative pieces but as living parts of family rituals."
+      },
+      {
+        heading: "Silver Purity Guide — 999 vs 925 vs German Silver",
+        level: "h2",
+        content:
+          "Not all silver pooja items are made the same. Here is what you need to know before buying."
+          + "\n\n"
+          + "999 Fine Silver (99.9% pure): This is the purest form of silver. It is soft, bends easily, and is used mainly for coins, bars, and investment-grade items. Pooja items in 999 silver are rare because the metal is too soft for daily handling."
+          + "\n\n"
+          + "925 Sterling Silver (92.5% pure): This is the standard for quality silver jewellery and pooja items in India. The remaining 7.5% is usually copper, added for strength. 925 silver is durable, holds intricate designs well, and is what we use for most of our pooja collection. Always ask for 92.5 hallmark from your jeweller."
+          + "\n\n"
+          + "German Silver: Despite the name, German silver contains ZERO silver. It is an alloy of copper, nickel, and zinc. It looks like silver but tarnishes differently, weighs less, and has no resale value as silver. Beware of sellers passing German silver as real silver — always verify the hallmark."
+          + "\n\n"
+          + "At Srivatsala Silver House on Revallapalem Road, we are transparent about purity. Every item comes with its weight, purity, and making charges clearly stated. No confusion. No shortcuts."
+      },
+      {
+        heading: "How Much Do Silver Pooja Items Cost in Vizag?",
+        level: "h2",
+        content:
+          "Silver prices in Vizag change daily based on market rates. But here is a rough price guide for the most common pooja items:"
+          + "\n\n"
+          + "Silver Pooja Thali (6-12 inch): ₹3,000 to ₹15,000"
+          + "\n\n"
+          + "Silver Diya / Lamp (50-300g): ₹2,500 to ₹20,000"
+          + "\n\n"
+          + "Silver Kalash (100-500g): ₹4,000 to ₹25,000"
+          + "\n\n"
+          + "Silver Bell / Ghanti: ₹1,500 to ₹8,000"
+          + "\n\n"
+          + "Silver Panchapatra Set: ₹2,000 to ₹6,000"
+          + "\n\n"
+          + "Silver Idols (2-12 inch): ₹3,000 to ₹50,000+"
+          + "\n\n"
+          + "Silver Kumkum Box: ₹800 to ₹3,000"
+          + "\n\n"
+          + "Silver Incense Stand: ₹800 to ₹2,500"
+          + "\n\n"
+          + "The final price depends on the day's silver rate, the weight of the item, and the making charges. We keep our making charges lower than big-brand showrooms — because we are a family-run shop, not a corporate chain. Call us at +91 97041 10147 for current pricing on any item."
+      },
+      {
+        heading: "Where to Buy Pure Silver Pooja Items in Madhurawada",
+        level: "h2",
+        content:
+          "You can search online, browse e-commerce sites, or visit a big-brand showroom on VIP Road. But if you want to see the quality in person, touch the finish, feel the weight, and talk to someone who understands both silver and tradition — come to Srivatsala Silver House."
+          + "\n\n"
+          + "We are located on Revallapalem Road, opposite Gayathri Clinic, Madhurawada. Our silver section is always open. Walk in any day between 10:30 AM and 9:00 PM."
+          + "\n\n"
+          + "Why Madhurawada families choose us for pooja items:"
+          + "\n\n"
+          + "1. We explain purity clearly — 925 hallmark, weight, and making charges are always transparent."
+          + "\n\n"
+          + "2. Our prices are lower than VIP Road showrooms because we do not charge for location or brand."
+          + "\n\n"
+          + "3. We stock items for every budget — from an ₹800 kumkum box to a ₹50,000+ custom silver idol."
+          + "\n\n"
+          + "4. Custom orders welcome. Need a specific size kalash? A particular deity idol? Our craftsmen can make it."
+          + "\n\n"
+          + "5. We have been serving Madhurawada and nearby areas — Kommadi, PM Palem, Carshed, Midhilapuri Colony, Yendada — for over fifteen years. Our neighbours trust us."
+          + "\n\n"
+          + "📍 Opposite Gayathri Clinic, Revallapalem Road, Madhurawada, Visakhapatnam-530048"
+          + "\n\n"
+          + "📞 Call or WhatsApp: +91 97041 10147"
+          + "\n\n"
+          + "No appointment needed. Just walk in."
+      },
+      {
+        heading: "Care Tips to Keep Your Silver Shining for Generations",
+        level: "h2",
+        content:
+          "Silver tarnishes over time — it is a natural reaction between silver and sulphur in the air. But with simple care, your silver pooja items will last for decades and can be passed down to your children's children."
+          + "\n\n"
+          + "1. Wash after every use. Mild soap and warm water. Dry immediately with a soft cloth."
+          + "\n\n"
+          + "2. Never use harsh chemicals or scrubbers. Silver scratches easily."
+          + "\n\n"
+          + "3. Store in a dry, airtight box. Add a small piece of chalk or silica gel to absorb moisture."
+          + "\n\n"
+          + "4. For tarnish removal, use a good-quality silver polish cloth (we can recommend one)."
+          + "\n\n"
+          + "5. For deep cleaning, a mixture of baking soda and water makes a gentle paste. Apply, rinse, dry."
+          + "\n\n"
+          + "6. Bring items to us once a year for professional cleaning. We offer free cleaning for items purchased from our showroom."
+          + "\n\n"
+          + "A well-maintained silver pooja item does not lose value. Unlike brass or copper that gets discarded, silver stays in the family. It is not an expense. It is a heirloom in the making."
+      },
+    ],
+    relatedSlugs: ["silver-jewellery-madhurawada-vizag"],
+    faq: [
+      {
+        question: "What are the essential silver pooja items for a home temple?",
+        answer: "The essential silver pooja items every home needs are: a silver diya (lamp), silver kalash, silver bell, silver pooja thali, panchapatra set with spoon, kumkum box, incense stand, and optionally a silver idol of your chosen deity. All of these are available at Srivatsala Silver House in Madhurawada."
+      },
+      {
+        question: "Is 925 silver good for pooja items?",
+        answer: "Yes. 925 sterling silver (92.5% pure) is the ideal choice for pooja items. It is strong enough for daily handling, holds intricate designs well, and is the standard for quality silverware in India. 999 fine silver is too soft for regular use."
+      },
+      {
+        question: "What is the difference between 999 and 925 silver?",
+        answer: "999 silver is 99.9% pure — very soft, used mainly for coins and investment bars. 925 silver (sterling silver) is 92.5% pure with 7.5% copper added for strength — ideal for pooja items and jewellery that need daily handling. Always look for the 925 hallmark."
+      },
+      {
+        question: "Where can I buy pure silver pooja items in Madhurawada?",
+        answer: "Srivatsala Silver House on Revallapalem Road, opposite Gayathri Clinic, Madhurawada, has been selling pure silver pooja items to local families for over 15 years. We stock silver thalis, diyas, kalash, bells, idols, and more at fair prices with transparent purity certification."
+      },
+      {
+        question: "Which silver pooja items are best for gifting?",
+        answer: "Silver diyas and kalash are the most popular gifting items for housewarmings and weddings. Silver pooja thali sets make excellent wedding gifts. Silver Ganesh or Lakshmi idols are ideal for festive occasions like Diwali and Ugadi. All are available at our Madhurawada showroom."
+      },
+      {
+        question: "How do I check if silver pooja items are pure?",
+        answer: "Look for the 925 hallmark stamp on the item. Check the weight — silver is priced by gram, so the weight should match the price. Test with a magnet — pure silver is non-magnetic. Buy from a trusted local jeweller like Srivatsala Silver House that has been serving Madhurawada for years."
+      },
+      {
+        question: "Can I use a silver diya for daily pooja?",
+        answer: "Absolutely. Silver diyas are designed for daily use. They hold ghee or oil well, do not heat up excessively on the base, and are easy to clean after each use. We recommend keeping a dedicated silver diya for daily Sandhya Vandanam — it develops a beautiful patina over years of use."
+      },
+    ],
+  },
+  {
+    slug: "bridal-jewellery-vaddanam-kasulaperu-gundla-haram-visakhapatnam",
+    title: "Traditional Andhra Bridal Jewellery Set — Vaddanam, Kasulaperu & Gundla Haram Price Guide 2026",
+    meta: "Planning your bridal jewellery in Visakhapatnam? Learn about Vaddanam, Kasulaperu & Gundla Haram — authentic Andhra bridal sets at Srivatsala Silver House, Madhurawada. Book a bridal consultation today.",
+    keyword: "bridal jewellery Visakhapatnam",
+    date: "2026-06-14",
+    readTime: "9 min read",
+    image: "/og-image.jpg",
+    imageAlt: "Traditional Andhra bridal jewellery set with Vaddanam, Kasulaperu and Gundla Haram at Srivatsala Silver House, Madhurawada",
+    sections: [
+      {
+        heading: "Every Andhra Bride Deserves the Real Thing",
+        level: "h2",
+        image: "https://images.pexels.com/photos/9975177/pexels-photo-9975177.jpeg",
+        imageAlt: "Traditional South Indian bridal gold jewellery display",
+        content:
+          "Search for bridal jewellery in Visakhapatnam and you will find dozens of showrooms showing the same modern, minimal designs. But if you were raised in an Andhra household, you know a real bridal set is not minimal. It is layered, it is heavy with meaning, and it carries names your grandmother still uses — Vaddanam, Kasulaperu, Gundla Haram."
+          + "\n\n"
+          + "At Srivatsala Silver House on Revallapalem Road, Madhurawada, we have been crafting and sourcing authentic Andhra bridal jewellery for over fifteen years. When a bride from Vizag, Kommadi, PM Palem, Yendada or anywhere along the coast comes to us, she is not just buying jewellery. She is continuing a tradition that her mother and grandmother wore on their own wedding day. This guide walks you through the three pieces every Andhra bride asks about most, what to expect on pricing, and how to plan your bridal shopping without the last-minute panic."
+      },
+      {
+        heading: "What Is Traditional Andhra Bridal Jewellery?",
+        level: "h2",
+        content:
+          "Andhra bridal jewellery is built around a handful of signature pieces that you will not find in a generic national jewellery chain. Each piece has a specific role in the wedding — some are worn during the ceremony itself, some during the reception, and some are gifted as part of the bride's stridhanam (personal wealth given at marriage). The three most requested pieces at our Madhurawada showroom are the Vaddanam, the Kasulaperu, and the Gundla Haram. Let's go through each one."
+      },
+      {
+        heading: "Vaddanam — The Bridal Waist Belt",
+        level: "h3",
+        image: "https://images.pexels.com/photos/10983760/pexels-photo-10983760.jpeg",
+        imageAlt: "Gold Vaddanam bridal waist belt with traditional Andhra motifs",
+        content:
+          "The Vaddanam (also called ottiyanam or waist belt) is worn around the bride's waist over the saree, sitting just above the hip. It is usually the most photographed piece of an Andhra bridal look, and for good reason — a well-made Vaddanam anchors the entire bridal silhouette."
+          + "\n\n"
+          + "We make Vaddanams in temple-style motifs (Lakshmi, peacock, mango), plain polished links for a lighter look, and fully custom designs built around a family heirloom pattern. Some brides prefer a lightweight Vaddanam for comfort through a long ceremony; others want the heavier, fuller look their mother wore. Both are available, and both are BIS hallmarked."
+      },
+      {
+        heading: "Kasulaperu — The Lakshmi Coin Necklace",
+        level: "h3",
+        content:
+          "Kasulaperu is the long gold necklace strung with coin-shaped pendants, each one embossed with the image of Goddess Lakshmi. It is one of the most recognisable pieces of South Indian bridal jewellery and is considered auspicious — Lakshmi is the goddess of wealth and prosperity, and wearing her image on the wedding day is meant to bless the new household."
+          + "\n\n"
+          + "The number of coins, their size, and the length of the necklace all vary by design. Some brides choose a shorter, single-strand Kasulaperu for a modern look; others go for the traditional multi-coin, chest-length version worn layered with a Gundla Haram. We keep a range of both in stock, and can also convert old family gold coins into a fresh Kasulaperu design if you want to reuse an heirloom."
+      },
+      {
+        heading: "Gundla Haram — The Layered Beaded Necklace",
+        level: "h3",
+        content:
+          "Gundla Haram is a long necklace made of small gold beads (gundlu), often finished with a decorative pendant or Lakshmi motif at the centre. It is typically worn layered under or over the Kasulaperu, giving the bridal neckline its signature fullness. Some brides pair a single Gundla Haram with other pieces; others layer two or three strands of varying lengths for a fuller, more traditional look."
+          + "\n\n"
+          + "Because the beads are small and closely strung, the weight and craftsmanship of a Gundla Haram matters a lot — a poorly made one looks thin and loose, while a well-made one drapes beautifully. Our karigars make these by hand right here in Vizag, so you can see the quality before you commit."
+      },
+      {
+        heading: "What a Complete Andhra Bridal Set Usually Includes",
+        level: "h2",
+        content:
+          "Beyond the three signature pieces above, a full Andhra bridal set typically brings together several complementary pieces so the whole look is coordinated. At Srivatsala Silver House, we help you build out a complete set rather than buying pieces one at a time from different places, which often results in mismatched gold tones or design styles."
+      },
+      {
+        heading: "Jhumkas (Bridal Earrings)",
+        level: "h3",
+        content:
+          "Large, bell-shaped temple-style earrings that balance the fullness of the necklaces. We stock jhumkas in varying weights so they stay comfortable through a long wedding day."
+      },
+      {
+        heading: "Mangalsutra",
+        level: "h3",
+        content:
+          "The most personal piece of the entire set — worn for life, not just the wedding day. We design mangalsutras in traditional black-bead-and-gold styles as well as more contemporary interpretations, always matched to the rest of the bridal set."
+      },
+      {
+        heading: "Vanki, Nethichutti & Mattelu",
+        level: "h3",
+        content:
+          "The armlet (Vanki), the maang tikka-style forehead ornament (Nethichutti), and the silver toe rings (Mattelu) complete the traditional look from head to toe. These smaller pieces are often overlooked when shopping online, but they make a real difference to how finished the bridal look feels in photographs."
+      },
+      {
+        heading: "How Bridal Jewellery Pricing Works",
+        level: "h2",
+        content:
+          "We get asked this question every single day: \"What will my bridal set cost?\" The honest answer is that there is no single number — bridal jewellery pricing depends on a few real factors, and any shop quoting you a fixed figure without seeing your requirements is guessing."
+          + "\n\n"
+          + "The main factors are: the day's gold rate (which changes daily and directly affects the base cost), the total weight of gold across all pieces you choose, the purity you select (22-carat is standard for bridal sets), the design complexity and hand-craftsmanship involved (a heavily detailed temple-style Vaddanam takes longer to make than a plain one), and the making charges, which vary by piece and design."
+          + "\n\n"
+          + "Because of these variables, prices vary considerably from one bride's set to another — a lightweight, minimal bridal combination will cost very differently from a full, heavy traditional set with multiple layered necklaces. The way to get an accurate number is simple: visit our Madhurawada showroom, or send us your requirements on WhatsApp, and we will walk you through the day's gold rate and give you a personalised quote based on exactly what you choose. No guesswork, no hidden making charges — everything is explained on the bill."
+      },
+      {
+        heading: "Why Vizag Brides Choose Srivatsala Silver House",
+        level: "h2",
+        content:
+          "There are bigger showrooms on VIP Road and in Dwaraka Nagar. But for bridal jewellery specifically, families across Madhurawada, Kommadi, PM Palem, Carshed, Midhilapuri Colony, Yendada and Rushikonda keep coming back to us. Here is why."
+      },
+      {
+        heading: "We Specialise in What Big Chains Don't",
+        level: "h3",
+        content:
+          "National chains stock fast-moving, modern designs because they sell across many states. Vaddanam, Kasulaperu, and Gundla Haram in authentic Andhra temple style are not their focus. It is ours. This is what we have specialised in for over fifteen years, and our karigars understand these designs the way a family goldsmith would — not from a catalogue."
+      },
+      {
+        heading: "Custom Bridal Consultations",
+        level: "h3",
+        content:
+          "Every bride is different. Some want to recreate their mother's bridal set exactly. Some want a lighter, modern take on tradition. Some are converting old family gold into a new design. We sit with you, understand what you want, and quote a clear price before any work begins."
+      },
+      {
+        heading: "BIS Hallmarked, Every Time",
+        level: "h3",
+        content:
+          "Bridal jewellery is often the single largest purchase a family makes for a wedding. Every gold piece we sell — bridal or otherwise — is BIS hallmarked, so the purity is certified and stamped on the metal itself. That protects the resale and exchange value of your set for years to come."
+      },
+      {
+        heading: "Made and Finished Right Here in Vizag",
+        level: "h3",
+        content:
+          "You do not need to send your design out of town and wait months for delivery. Our karigars work from the Madhurawada showroom. You can check on progress, request small changes, and collect your finished set without the anxiety of a long-distance order before a wedding date."
+      },
+      {
+        heading: "Planning Your Bridal Jewellery Shopping — A Simple Timeline",
+        level: "h2",
+        content:
+          "Bridal jewellery, especially anything custom-made like a Vaddanam or a converted heirloom piece, takes time to craft properly. We recommend starting your bridal jewellery shopping at least two to three months before the wedding date if you want custom work done, and at least three to four weeks ahead even for in-stock designs, so there is time for any resizing or last-minute additions like a matching mangalsutra or jhumkas."
+          + "\n\n"
+          + "Waiting until the final week almost always means settling for whatever is in stock. Visiting early gives you time to compare designs, get an accurate price based on the gold rate on different days, and make changes without pressure."
+      },
+      {
+        heading: "Book Your Bridal Consultation Today",
+        level: "h2",
+        content:
+          "If you are a bride-to-be anywhere in Visakhapatnam — Madhurawada, Kommadi, PM Palem, Yendada, Rushikonda or beyond — visit Srivatsala Silver House to see and try on authentic Vaddanam, Kasulaperu, and Gundla Haram designs in person. Photos and reels never show how a bridal set truly moves and catches light. You need to try it on."
+          + "\n\n"
+          + "📍 Opposite Gayathri Clinic, Revallapalem Road, Madhurawada, Visakhapatnam-530048"
+          + "\n\n"
+          + "🕐 Open every day: 10:30 AM to 9:00 PM. No appointment needed."
+          + "\n\n"
+          + "📞 Call or WhatsApp us at +91 97041 10147 to book a bridal consultation. Tell us your wedding date and what you have in mind, and we will have relevant designs ready to show you when you arrive."
+      },
+      {
+        heading: "Found Us While Planning Your Wedding Search?",
+        level: "h3",
+        content:
+          "Most of the brides who read this guide found it while searching online — that is by design. Our website and local search presence are handled by [Vyzma AI](https://vyzma.in), a Visakhapatnam digital marketing team that helps local businesses like ours get found by the customers actually looking for them."
+      },
+    ],
+    relatedSlugs: ["best-jewellery-shop-madhurawada-vizag", "certified-gold-silver-jewellery-madhurawada-vizag"],
+    faq: [
+      {
+        question: "What is the difference between Vaddanam, Kasulaperu and Gundla Haram?",
+        answer: "Vaddanam is a gold waist belt worn over the saree during the wedding. Kasulaperu is a long necklace strung with Lakshmi-coin pendants. Gundla Haram is a beaded necklace made of small gold beads, usually layered with the Kasulaperu. Together they form the core of a traditional Andhra bridal set."
+      },
+      {
+        question: "How much does a bridal jewellery set cost in Visakhapatnam?",
+        answer: "Bridal set pricing depends on the day's gold rate, total weight, purity, and design complexity, so it varies from bride to bride. Visit our Madhurawada showroom or WhatsApp us your requirements at +91 97041 10147 for a personalised quote based on the current gold rate."
+      },
+      {
+        question: "Can I get a Vaddanam or Kasulaperu custom made?",
+        answer: "Yes. Our karigars work from the Madhurawada showroom and can custom-make a Vaddanam, Kasulaperu, or Gundla Haram to your design, including converting old family gold into a new bridal piece. Bring a photo, sketch, or heirloom for reference."
+      },
+      {
+        question: "How far in advance should I start bridal jewellery shopping?",
+        answer: "We recommend starting two to three months before the wedding date for custom or heavily detailed pieces, and at least three to four weeks ahead even for in-stock designs, to allow time for resizing or additions."
+      },
+      {
+        question: "Is your bridal gold BIS hallmarked?",
+        answer: "Yes. Every gold piece we sell, including full bridal sets, is BIS hallmarked, so the purity is certified and stamped on the metal — protecting the resale and exchange value of your jewellery for years."
+      },
+      {
+        question: "Do you make complete bridal sets or only individual pieces?",
+        answer: "Both. We can put together a complete coordinated set — Vaddanam, Kasulaperu, Gundla Haram, jhumkas, mangalsutra, Vanki, Nethichutti and Mattelu — or make individual pieces if you already have some jewellery and want to add to it."
+      },
+      {
+        question: "Where can I see bridal jewellery designs before my wedding?",
+        answer: "Visit Srivatsala Silver House on Revallapalem Road, opposite Gayathri Clinic, Madhurawada. We are open every day from 10:30 AM to 9:00 PM, no appointment needed. You can also WhatsApp us at +91 97041 10147 and tell us your wedding date so we have relevant designs ready when you arrive."
+      },
+    ],
+  },
+  {
+    slug: "certified-gold-silver-jewellery-madhurawada-vizag",
+    title: "Certified Gold & 92.5 Silver Jewellery in Madhurawada, Vizag — BIS Hallmarked with Custom Designs",
+    meta: "Looking for BIS hallmarked gold and 92.5 silver jewellery in Madhurawada? Srivatsala Silver House offers certified purity, custom bridal designs, and transparent pricing. Visit us on Revallapalem Road or call +91 97041 10147.",
+    keyword: "gold silver jewellery Madhurawada certified",
+    date: "2026-06-14",
+    readTime: "9 min read",
+    image: "/og-image.jpg",
+    imageAlt: "Srivatsala Silver House — certified gold and 92.5 silver jewellery showroom in Madhurawada, Visakhapatnam",
+    sections: [
+      {
+        heading: "Your Neighbourhood Jeweller for Life's Biggest Moments",
+        level: "h2",
+        image: "https://images.pexels.com/photos/9975177/pexels-photo-9975177.jpeg",
+        imageAlt: "Gold jewellery display at a trusted jewellery showroom in Madhurawada, Visakhapatnam",
+        content:
+          "When it comes to buying precious metals for traditional Andhra milestones, finding a highly recommended jewellery shop in Madhurawada saves you hours of navigating main city Visakhapatnam traffic. Whether you are searching for a certified gold shop near me for an upcoming bridal lay out or trying to source authentic silver articles in Madhurawada for home poojas, trust, purity, and localized convenience are non-negotiable."
+          + "\n\n"
+          + "For more than 15 years, Srivatsala Silver House has served as a cornerstone of authentic craftsmanship along the Revallapalem Road corridor. We provide families across PM Palem, Midhilapuri Vuda Colony, Kommadi, and Car Shed Junction with 100% certified metals right in their neighbourhood. No long drives to Dwaraka Nagar. No dealing with pushy salespeople. Just honest jewellery from people who have been your neighbours for over a decade and a half."
+      },
+      {
+        heading: "What Makes a Local Showroom the Top Choice for Gold & Silver?",
+        level: "h2",
+        content:
+          "Finding a trustworthy jewellery retailer requires evaluating local reputation, fair calculation patterns, and official verification markers. Here is why discerning shoppers bypass larger chains to visit our specialized boutique workspace."
+      },
+      {
+        heading: "100% BIS Hallmarked Purity Certifications",
+        level: "h3",
+        image: "https://images.pexels.com/photos/635362/pexels-photo-635362.jpeg",
+        imageAlt: "BIS hallmarked gold bangles and jewellery at Srivatsala Silver House in Madhurawada",
+        content:
+          "Never buy gold or silver without verifying the official Bureau of Indian Standards stamp. Every gold element and 92.5 sterling silver jewellery piece at our showroom features clear hallmarking. This ensures that your ancestral investments protect their accurate market value over generations."
+          + "\n\n"
+          + "When you purchase from us, you get a permanent record of purity. Whether it is a 2-gram gold ring or a 150-gram bridal set, the hallmark is your guarantee. You are not taking our word for it — the proof is stamped right on the metal."
+      },
+      {
+        heading: "Transparent Billing and Low Wastage",
+        level: "h3",
+        content:
+          "Unlike mass-market stores that add hidden premiums, we believe in open business operations. We break down the precise daily metal weight cost against competitive making and wastage charges directly on your receipt. You see exactly what you are paying for — the gold, the craftsmanship, and nothing else."
+          + "\n\n"
+          + "Many customers in Madhurawada and PM Palem have told us they discovered hidden charges in their old bills from other stores only after comparing with our transparent pricing. That is the Srivatsala difference."
+      },
+      {
+        heading: "Master Artisan Customizations Nearby",
+        level: "h3",
+        content:
+          "Looking to convert a specific coin into a tailored pendant? Need traditional temple-style Jhumkas custom made? Our on-site workshop coordinates directly with master craftsmen to turn your sketches or digital references into custom-fit legacy ornaments."
+          + "\n\n"
+          + "You do not need to send your design to a workshop in Mumbai or Jaipur and wait for months. Our karigars work right here in Vizag. You can visit the showroom, discuss the design, see the progress, and get the finished piece without leaving Madhurawada."
+      },
+      {
+        heading: "Complete Showroom Collection Breakdown",
+        level: "h2",
+        content:
+          "Our space on Revallapalem Road is specifically structured around the cultural needs of local Andhra families. Here is exactly what you will find when you walk in."
+      },
+      {
+        heading: "Traditional Ornaments",
+        level: "h3",
+        image: "https://images.pexels.com/photos/10983760/pexels-photo-10983760.jpeg",
+        imageAlt: "Traditional Andhra gold jewellery collection featuring Vaddanam, Kasulaperu and Jhumkas at Srivatsala Silver House",
+        content:
+          "Heavy stone-studded Vaddanams (waist belts) for brides. Custom bridal sets that include Kasulaperu, Gundla Haram, Jhumkas, and Mangalsutra. Daily-wear lightweight gold chains and earrings for working women. Nose pins, rings, bangles, and everything in between. All BIS hallmarked, all at fair prices."
+      },
+      {
+        heading: "92.5 Sterling Silver Jewellery",
+        level: "h3",
+        image: "https://images.pexels.com/photos/1687353/pexels-photo-1687353.jpeg",
+        imageAlt: "92.5 hallmark silver anklets, bangles and jewellery collection at Srivatsala Silver House in Madhurawada",
+        content:
+          "Designer anklets (Payal) with or without bells. Premium adjustable toe rings (Mattelu) for daily wear. Elegant lifestyle bracelets and bangles. Silver chains and pendants for every occasion. Our silver section rivals any big-brand showroom in Vizag — at prices that make sense for local families."
+      },
+      {
+        heading: "Pooja Room Essentials",
+        level: "h3",
+        content:
+          "Extensively carved pure silver plates (Thalis), lamps (Diyas), coins, and holy idols for domestic festivals. Silver Kalash sets for housewarmings and weddings. Silver bells, Panchapatra sets, and Kumkum boxes. Everything your home temple needs, available right here in Madhurawada."
+      },
+      {
+        heading: "Purity, Pricing & Service at a Glance",
+        level: "h2",
+        content:
+          "Purity Standard: 100% BIS Hallmarked Gold and 92.5 Hallmarked Silver. That means verified exchange and resale values for every purchase you make."
+          + "\n\n"
+          + "Location Access: Revallapalem Road, Opposite Gayatri Clinic. No need to navigate central city traffic corridors."
+          + "\n\n"
+          + "Custom Projects: On-site design adjustments and repairs. You get exact creative control over bridal styles and heirloom conversions."
+          + "\n\n"
+          + "Delivery Radius: Free home shipping within Visakhapatnam for stress-free delivery of valuable purchases."
+      },
+      {
+        heading: "Real Feedback from Neighbours in Madhurawada & PM Palem",
+        level: "h2",
+        content:
+          "Do not just take our word for it. Here is why your local community rates us as a trusted gold and silver shop."
+          + "\n\n"
+          + "\u201CGot my commemorative coin converted into a beautiful pendant at Srivatsala Silver House. The finishing is excellent, and the billing was completely transparent!\u201D \u2014 Local customer from Visakhapatnam"
+          + "\n\n"
+          + "\u201CTheir silver collection is beautiful. Got my daughter's bridal jhumkas custom-made here. They captured exactly the temple style I wanted.\u201D \u2014 Anitha N., Madhurawada Resident"
+          + "\n\n"
+          + "\u201CI have been buying from Srivatsala for over ten years. Gold, silver, pooja items \u2014 never once felt cheated. They explain everything clearly.\u201D \u2014 Rajesh K., PM Palem"
+      },
+      {
+        heading: "Visit Our Showroom — Real-Time Driving Directions",
+        level: "h2",
+        content:
+          "Stop scrolling through list websites searching for a generic jewellery store near me. Visit our showroom to experience premium service close to home."
+          + "\n\n"
+          + "📍 Opposite Gayatri Clinic, Revallapalem Road, near DMART, Srinivasa Nagar, Madhurawada, Visakhapatnam, Andhra Pradesh 530048."
+          + "\n\n"
+          + "Located right down the road from the Madhurawada DMART service road line, easily accessible from the National Highway 16 corridor. Coming from Kommadi? Take the Madhurawada road towards Carshed junction — about 2 minutes from the junction. Coming from PM Palem? Head towards Madhurawada main road — we are opposite Gayatri Clinic, easy to spot."
+          + "\n\n"
+          + "⏰ Open 7 days a week from 10:30 AM to 9:00 PM. No weekly off. No appointment needed."
+          + "\n\n"
+          + "📞 Click to connect with our master jeweller via WhatsApp at +91 97041 10147 to verify daily gold rates or send design references. We can keep your shortlist ready before you arrive."
+      },
+    ],
+    relatedSlugs: ["best-jewellery-shop-madhurawada-vizag", "silver-jewellery-madhurawada-vizag", "gold-silver-jewellery-kommadi-pm-palem-madhurawada", "bridal-jewellery-vaddanam-kasulaperu-gundla-haram-visakhapatnam"],
+    faq: [
+      {
+        question: "Which is the most trusted gold and silver shop in Madhurawada?",
+        answer: "Srivatsala Silver House on Revallapalem Road, opposite Gayatri Clinic, is the most trusted jewellery shop in Madhurawada. We have been serving local families for over 15 years with 100% BIS hallmarked gold and 92.5 hallmark silver jewellery."
+      },
+      {
+        question: "Do you offer custom bridal jewellery design services?",
+        answer: "Yes. Our on-site workshop works directly with master craftsmen to create custom bridal jewellery. Bring a photo, sketch, or just an idea — we will quote the price and delivery before you commit. WhatsApp us at +91 97041 10147."
+      },
+      {
+        question: "What purity certification do your gold and silver items carry?",
+        answer: "All our gold jewellery carries BIS hallmark certification. Our silver items are 92.5% pure sterling silver. We are transparent about purity, weight, and making charges on every purchase."
+      },
+      {
+        question: "Is your pricing really lower than VIP Road showrooms?",
+        answer: "Yes. We are a family-run showroom with lower overheads — no VIP Road rent, no corporate marketing budget. Our making charges are transparent and competitive. You pay for the metal and the craftsmanship, not the brand name."
+      },
+      {
+        question: "Can I exchange old jewellery at Srivatsala Silver House?",
+        answer: "Absolutely. We accept old gold and silver jewellery regardless of where you bought it. We assess purity and offer a fair exchange value based on the day's market rate."
+      },
+      {
+        question: "What are your store hours and location?",
+        answer: "We are open every day from 10:30 AM to 9:00 PM. No weekly off. Located opposite Gayatri Clinic on Revallapalem Road, Madhurawada, near DMART. Walk in any time."
+      },
+      {
+        question: "Do you offer free delivery in Visakhapatnam?",
+        answer: "Yes, we offer free home shipping within Visakhapatnam for valuable purchases. You can also visit our showroom in person to see and try before you buy."
+      },
+    ],
+  },
+  {
+    slug: "ai-website-design-jewellery-shop-vizag",
+    title: "How Srivatsala Silver House Got a Modern Website — AI-Powered Design for Vizag Jewellers",
+    meta: "Srivatsala Silver House in Madhurawada partnered with Vyzma AI to build a fast, modern website. How AI-powered website design is helping traditional jewellery shops in Vizag attract more customers online.",
+    keyword: "website design for jewellery shop Vizag",
+    date: "2026-07-04",
+    readTime: "6 min read",
+    image: "/og-image.jpg",
+    imageAlt: "AI-powered website design for Srivatsala Silver House jewellery shop Madhurawada Vizag by Vyzma AI",
+    sections: [
+      {
+        heading: "Why Srivatsala Silver House Decided to Go Online",
+        level: "h2",
+        content: "For fifteen years, Srivatsala Silver House in Madhurawada served customers through word of mouth and walk-ins. Business was good. But the family noticed something changing — more customers were searching Google before visiting any shop. Young couples planning their wedding jewellery, mothers looking for silver anklets for their daughters, students buying their first gold ring — all of them checked online first.\n\nThat is when the decision was made. Time to build a proper website."
+      },
+      {
+        heading: "Choosing Vyzma AI for the Website",
+        level: "h2",
+        content: "After speaking with several web designers in Vizag, Srivatsala Silver House chose Vyzma AI — a Visakhapatnam-based AI agency — to build the website. The reason was simple. Vyzma AI understood the local market. They knew what Madhurawada customers search for, how to write content that feels personal, and how to build a website that loads fast even on mobile data.\n\nVyzma AI is headquartered in Visakhapatnam and specialises in building websites and AI-powered digital marketing solutions for Indian businesses. Their team built the Srivatsala website using modern technology — React, Vite, and Tailwind CSS — so the site loads in under two seconds even on a 4G connection."
+      },
+      {
+        heading: "What Changed After the Website Went Live",
+        level: "h3",
+        content: "Within the first month of the website going live, the shop started receiving enquiries from customers in PM Palem, Kommadi, and Yendada who had never visited before. They found the shop by searching Google. The website clearly shows the BIS hallmark certification, the address, photos of the collections, and a WhatsApp contact button — everything a customer needs to decide before they visit."
+      },
+      {
+        heading: "AI-Powered Website Design Is Not Just for Big Brands",
+        level: "h2",
+        content: "Many small business owners in Vizag think a good website costs lakhs of rupees and months of work. That is not true anymore. Vyzma AI builds professional websites for local businesses starting at affordable prices, with quick delivery.\n\nIf you run a jewellery shop, a medical clinic, a restaurant, or any local business in Visakhapatnam and you want more customers to find you online, a website built with proper SEO is the first step. You can reach Vyzma AI at vyzma.in or call +91-8886720908."
+      },
+      {
+        heading: "The Right Partner Makes the Difference",
+        level: "h3",
+        content: "Srivatsala Silver House chose a local Vizag partner who understood the community. Vyzma AI did not just build a website — they wrote content that speaks to Madhurawada families, optimised the site for Google searches that local customers actually use, and set it up so the family can update it without any technical knowledge."
+      }
+    ],
+    faq: [
+      {
+        question: "Who built the Srivatsala Silver House website?",
+        answer: "The Srivatsala Silver House website was built by Vyzma AI, a Visakhapatnam-based AI agency specialising in website design and digital marketing for Indian businesses. Vyzma AI is located in Madhurawada, Vizag."
+      },
+      {
+        question: "How much does a website cost for a jewellery shop in Vizag?",
+        answer: "Website design for a jewellery shop in Vizag starts at affordable prices depending on the features required. Vyzma AI offers website design packages for local businesses in Visakhapatnam. Contact vyzma.in for pricing."
+      },
+      {
+        question: "Can a small jewellery shop benefit from having a website?",
+        answer: "Yes. Most customers in Vizag now search Google before visiting any shop. A well-built website with proper SEO helps local shops appear in those searches and attract new customers from nearby areas."
+      },
+      {
+        question: "What is Vyzma AI?",
+        answer: "Vyzma AI is India's premier AI agency, headquartered in Visakhapatnam (Vizag). They build websites, AI chatbots, automation systems, and run digital marketing for Indian businesses. Website: vyzma.in. Phone: +91-8886720908."
+      }
+    ]
   },
 ];
 

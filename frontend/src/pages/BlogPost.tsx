@@ -7,6 +7,26 @@ import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppFab } from "@/components/site/WhatsAppFab";
 
+const linkPattern = /\[([^\]]+)\]\(([^)]+)\)/g;
+
+function renderWithLinks(text: string) {
+  const parts: (string | JSX.Element)[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  linkPattern.lastIndex = 0;
+  while ((match = linkPattern.exec(text)) !== null) {
+    if (match.index > lastIndex) parts.push(text.slice(lastIndex, match.index));
+    parts.push(
+      <a key={match.index} href={match[2]} target="_blank" rel="noopener noreferrer" className="text-rose-gold underline">
+        {match[1]}
+      </a>
+    );
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < text.length) parts.push(text.slice(lastIndex));
+  return parts;
+}
+
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = slug ? getBlogBySlug(slug) : undefined;
@@ -56,6 +76,16 @@ const BlogPost = () => {
     ],
   };
 
+  const schemaFAQ = post.faq.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: post.faq.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  } : null;
+
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
@@ -78,6 +108,7 @@ const BlogPost = () => {
 
         <script type="application/ld+json">{JSON.stringify(schemaArticle)}</script>
         <script type="application/ld+json">{JSON.stringify(schemaBreadcrumb)}</script>
+        {schemaFAQ && <script type="application/ld+json">{JSON.stringify(schemaFAQ)}</script>}
       </Helmet>
       <Nav />
       <article className="container py-32 max-w-3xl mx-auto">
@@ -106,9 +137,17 @@ const BlogPost = () => {
                 <Component className={`font-display text-silver mt-8 mb-4 ${section.level === "h2" ? "text-2xl sm:text-3xl" : "text-xl sm:text-2xl text-gold-light"}`}>
                   {section.heading}
                 </Component>
+                {section.image && (
+                  <img
+                    src={section.image}
+                    alt={section.imageAlt || section.heading}
+                    className="w-full rounded-xl mb-6 object-cover"
+                    loading="lazy"
+                  />
+                )}
                 {section.content.split("\n\n").map((para, j) => (
                   <p key={j} className="text-silver/80 leading-relaxed mb-4">
-                    {para}
+                    {renderWithLinks(para)}
                   </p>
                 ))}
               </div>
